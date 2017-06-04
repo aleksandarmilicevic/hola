@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist SYSTEM "file://localhost/System/Library/DTDs/PropertyList.dtd">
+<plist version="0.9">
+<dict>
+
+    <!-- Generic stuff -->
+    <key>CFBundleDevelopmentRegion</key> <string>English</string>
+    <key>CFBundleInfoDictionaryVersion</key> <string>6.0</string>
+    <key>CFBundlePackageType</key> <string>APPL</string>
+    <key>CFBundleAllowMixedLocalizations</key> <string>true</string>
+    <key>CFBundleSignature</key> <string>????</string>
+
+    <!-- This will be the MENUNAME on the top-left corner of screen. -->
+    <!-- It will also be shown in the about box in the first line. -->
+    <key>CFBundleName</key> <string>Alloy 4</string>
+
+    <!-- These two things will be shown in the about box. -->
+    <!-- It will say "Version x (y)" where x=ShortVersionString and y=BundleVersion -->
+    <key>CFBundleShortVersionString</key> <string>4</string>
+    <key>CFBundleVersion</key> <string></string>
+
+    <key>CFBundleGetInfoString</key> <string></string>
+    <key>CFBundleIdentifier</key> <string>edu.mit.alloy</string>
+    <key>CFBundleIconFile</key> <string>AlloyLogo.icns</string>
+
+    <key>CFBundleDocumentTypes</key>
+    <array>
+      <dict>
+         <key>CFBundleTypeExtensions</key>
+         <array><string>als</string></array>
+         <key>CFBundleTypeIconFile</key>
+         <string>AlloyFile.icns</string>
+         <key>CFBundleTypeName</key>
+         <string>Alloy4 Model File</string>
+         <key>CFBundleTypeRole</key>
+         <string>Editor</string> <!-- Possible values: Editor, Viewer, None. -->
+      </dict>
+    </array>
+
+    <!-- Java stuff -->
+    <key>CFBundleExecutable</key> <string>JavaApplicationStub</string>
+    <key>Java</key>
+    <dict>
+        <key>VMOptions</key> <string>-Xmx256m -Xdock:name=Alloy4</string>
+        <key>MainClass</key> <string>edu.mit.csail.sdg.alloy4whole.SimpleGUI</string>
+        <key>JVMVersion</key> <string>1.5+</string>
+        <key>ClassPath</key> <string>$JAVAROOT/alloy4.jar</string>
+        <key>WorkingDirectory</key> <string>$APP_PACKAGE/Contents/Resources/Java</string>
+        <key>Properties</key>
+        <dict>
+            <key>apple.laf.useScreenMenuBar</key>       <string>true</string>
+            <key>apple.awt.antialiasing</key>           <string>true</string>
+            <key>apple.awt.graphics.UseQuartz</key>     <string>true</string>
+            <key>com.apple.macos.useScreenMenuBar</key> <string>true</string>
+            <key>com.apple.mrj.application.apple.menu.about.name</key> <string>Alloy 4.2</string>
+            <key>com.apple.mrj.application.live-resize</key>           <string>true</string>
+        </dict>
+    </dict>
+</dict>
+</plist>

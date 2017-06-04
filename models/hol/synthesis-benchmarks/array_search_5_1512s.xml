@@ -1,0 +1,175 @@
+<alloy builddate="unknown">
+
+<instance bitwidth="4" minint="0" maxint="6" intinc="1" maxseq="6" command="Run run$1 for 22 but 4 int, exactly 6 ITE, exactly 4 LT" filename="/home/aleks/work/projects/alloy-git/models/hol/synthesis-benchmarks/array_search_5.als">
+
+<sig label="seq/Int" ID="0" parentID="1" builtin="yes">
+</sig>
+
+<sig label="Int" ID="1" parentID="2" builtin="yes">
+</sig>
+
+<sig label="String" ID="3" parentID="2" builtin="yes">
+</sig>
+
+<sig label="this/BoolTrue" ID="4" parentID="5" one="yes">
+   <atom label="BoolTrue$0"/>
+</sig>
+
+<sig label="this/BoolFalse" ID="6" parentID="5" one="yes">
+   <atom label="BoolFalse$0"/>
+</sig>
+
+<sig label="this/Bool" ID="5" parentID="2" abstract="yes">
+</sig>
+
+<sig label="this/X1" ID="7" parentID="8" one="yes">
+   <atom label="X1$0"/>
+</sig>
+
+<sig label="this/X2" ID="9" parentID="8" one="yes">
+   <atom label="X2$0"/>
+</sig>
+
+<sig label="this/X3" ID="10" parentID="8" one="yes">
+   <atom label="X3$0"/>
+</sig>
+
+<sig label="this/X4" ID="11" parentID="8" one="yes">
+   <atom label="X4$0"/>
+</sig>
+
+<sig label="this/X5" ID="12" parentID="8" one="yes">
+   <atom label="X5$0"/>
+</sig>
+
+<sig label="this/K" ID="13" parentID="8" one="yes">
+   <atom label="K$0"/>
+</sig>
+
+<sig label="this/Var" ID="8" parentID="14" abstract="yes">
+</sig>
+
+<sig label="this/Zero" ID="15" parentID="16" one="yes">
+   <atom label="Zero$0"/>
+</sig>
+
+<sig label="this/One" ID="17" parentID="16" one="yes">
+   <atom label="One$0"/>
+</sig>
+
+<sig label="this/Two" ID="18" parentID="16" one="yes">
+   <atom label="Two$0"/>
+</sig>
+
+<sig label="this/Three" ID="19" parentID="16" one="yes">
+   <atom label="Three$0"/>
+</sig>
+
+<sig label="this/Four" ID="20" parentID="16" one="yes">
+   <atom label="Four$0"/>
+</sig>
+
+<sig label="this/Five" ID="21" parentID="16" one="yes">
+   <atom label="Five$0"/>
+</sig>
+
+<sig label="this/IntLit" ID="16" parentID="14" abstract="yes">
+</sig>
+
+<sig label="this/ITE" ID="22" parentID="14">
+   <atom label="ITE$0"/>
+   <atom label="ITE$1"/>
+   <atom label="ITE$2"/>
+   <atom label="ITE$3"/>
+   <atom label="ITE$4"/>
+   <atom label="ITE$5"/>
+</sig>
+
+<field label="condition" ID="23" parentID="22">
+   <tuple> <atom label="ITE$0"/> <atom label="LT$3"/> </tuple>
+   <tuple> <atom label="ITE$1"/> <atom label="LT$2"/> </tuple>
+   <tuple> <atom label="ITE$2"/> <atom label="LT$3"/> </tuple>
+   <tuple> <atom label="ITE$3"/> <atom label="LT$2"/> </tuple>
+   <tuple> <atom label="ITE$4"/> <atom label="LT$1"/> </tuple>
+   <tuple> <atom label="ITE$5"/> <atom label="LT$0"/> </tuple>
+   <types> <type ID="22"/> <type ID="24"/> </types>
+</field>
+
+<field label="then" ID="25" parentID="22">
+   <tuple> <atom label="ITE$0"/> <atom label="Two$0"/> </tuple>
+   <tuple> <atom label="ITE$1"/> <atom label="ITE$2"/> </tuple>
+   <tuple> <atom label="ITE$2"/> <atom label="Four$0"/> </tuple>
+   <tuple> <atom label="ITE$3"/> <atom label="X5$0"/> </tuple>
+   <tuple> <atom label="ITE$4"/> <atom label="ITE$1"/> </tuple>
+   <tuple> <atom label="ITE$5"/> <atom label="ITE$4"/> </tuple>
+   <types> <type ID="22"/> <type ID="14"/> </types>
+</field>
+
+<field label="elsen" ID="26" parentID="22">
+   <tuple> <atom label="ITE$0"/> <atom label="Three$0"/> </tuple>
+   <tuple> <atom label="ITE$1"/> <atom label="ITE$0"/> </tuple>
+   <tuple> <atom label="ITE$2"/> <atom label="Five$0"/> </tuple>
+   <tuple> <atom label="ITE$3"/> <atom label="X3$0"/> </tuple>
+   <tuple> <atom label="ITE$4"/> <atom label="One$0"/> </tuple>
+   <tuple> <atom label="ITE$5"/> <atom label="Zero$0"/> </tuple>
+   <types> <type ID="22"/> <type ID="14"/> </types>
+</field>
+
+<sig label="this/IntNode" ID="14" parentID="27" abstract="yes">
+</sig>
+
+<sig label="this/GT" ID="28" parentID="24">
+</sig>
+
+<field label="left" ID="29" parentID="28">
+   <types> <type ID="28"/> <type ID="14"/> </types>
+</field>
+
+<field label="right" ID="30" parentID="28">
+   <types> <type ID="28"/> <type ID="14"/> </types>
+</field>
+
+<sig label="this/LT" ID="31" parentID="24">
+   <atom label="LT$0"/>
+   <atom label="LT$1"/>
+   <atom label="LT$2"/>
+   <atom label="LT$3"/>
+</sig>
+
+<field label="left" ID="32" parentID="31">
+   <tuple> <atom label="LT$0"/> <atom label="X1$0"/> </tuple>
+   <tuple> <atom label="LT$1"/> <atom label="X2$0"/> </tuple>
+   <tuple> <atom label="LT$2"/> <atom label="X4$0"/> </tuple>
+   <tuple> <atom label="LT$3"/> <atom label="K$0"/> </tuple>
+   <types> <type ID="31"/> <type ID="14"/> </types>
+</field>
+
+<field label="right" ID="33" parentID="31">
+   <tuple> <atom label="LT$0"/> <atom label="K$0"/> </tuple>
+   <tuple> <atom label="LT$1"/> <atom label="K$0"/> </tuple>
+   <tuple> <atom label="LT$2"/> <atom label="K$0"/> </tuple>
+   <tuple> <atom label="LT$3"/> <atom label="ITE$3"/> </tuple>
+   <types> <type ID="31"/> <type ID="14"/> </types>
+</field>
+
+<sig label="this/BoolNode" ID="24" parentID="27" abstract="yes">
+</sig>
+
+<sig label="this/Node" ID="27" parentID="2" abstract="yes">
+</sig>
+
+<sig label="univ" ID="2" builtin="yes">
+</sig>
+
+<skolem label="$root" ID="34">
+   <tuple> <atom label="ITE$5"/> </tuple>
+   <types> <type ID="14"/> </types>
+</skolem>
+
+</instance>
+
+<source filename="/home/aleks/work/projects/alloy-git/models/hol/synthesis-benchmarks/array_search_5.als" content="--------------------------------------------------------------------------------&#x000a;-- Variables and Values&#x000a;--------------------------------------------------------------------------------&#x000a;abstract sig Bool {}&#x000a;one sig BoolTrue extends Bool {}&#x000a;one sig BoolFalse extends Bool {}&#x000a;&#x000a;&#x000a;abstract sig Var extends IntNode {}&#x000a;one sig X1, X2, X3, X4, X5, K extends Var {}&#x000a;&#x000a;abstract sig IntLit extends IntNode {}&#x000a;one sig Zero,One,Two,Three,Four,Five extends IntLit{}&#x000a;&#x000a;&#x000a;&#x000a;--------------------------------------------------------------------------------&#x000a;-- AST Nodes&#x000a;--------------------------------------------------------------------------------&#x000a;abstract sig Node {}&#x000a;&#x000a;abstract sig IntNode extends Node {}&#x000a;&#x000a;sig ITE extends IntNode {&#x000a;  condition: BoolNode,&#x000a;  then: IntNode,&#x000a;  elsen: IntNode&#x000a;} &#x000a;&#x000a;abstract sig BoolNode extends Node {}&#x000a;sig GT, LT extends BoolNode {&#x000a;  left, right: IntNode&#x000a;}&#x000a;&#x000a;--------------------------------------------------------------------------------&#x000a;-- Semantics&#x000a;--------------------------------------------------------------------------------&#x000a;pred semantics[eval: Node -&gt; (Int + Bool)] {&#x000a;  all n: ITE {&#x000a;    eval[n] in Int&#x000a;    eval[n.condition] = BoolTrue implies &#x000a;      eval[n.then] = eval[n] else eval[n.elsen] = eval[n]&#x000a;  }&#x000a;&#x000a;  all n: GT {&#x000a;    eval[n] in Bool&#x000a;    eval[n.left] &gt; eval[n.right] implies&#x000a;    eval[n] = BoolTrue else eval[n] = BoolFalse&#x000a;  }&#x000a;&#x000a;  all n: LT {&#x000a;    eval[n] in Bool&#x000a;    eval[n.left] &lt; eval[n.right] implies&#x000a;    eval[n] = BoolTrue else eval[n] = BoolFalse&#x000a;  }&#x000a;&#x000a;  eval[Zero] = 0&#x000a;  eval[One] = 1&#x000a;  eval[Two] = 2&#x000a;  eval[Three] = 3&#x000a;  eval[Four] = 4&#x000a;  eval[Five] = 5&#x000a;&#x000a;  all v: Var | one eval[v] and eval[v] in Int&#x000a;}&#x000a;&#x000a;--------------------------------------------------------------------------------&#x000a;-- Property&#x000a;--------------------------------------------------------------------------------&#x000a;pred irreflexive [r: univ -&gt; univ] {no iden &amp; r}&#x000a;&#x000a;pred acyclic[r: univ-&gt;univ, s: set univ] {&#x000a;  all x: s | x !in x.^r&#x000a;}&#x000a;&#x000a;fact {&#x000a;  acyclic[condition+then+elsen+(GT &lt;: left)+(LT &lt;: left)+(GT &lt;: right)+(LT &lt;: right), Node]&#x000a;}&#x000a;&#x000a;pred spec[root: Node, eval: Node -&gt; (Int + Bool)] {&#x000a;  (eval[X1] &lt; eval[X2] and eval[X2] &lt; eval[X3] and eval[X3] &lt; eval[X4] and eval[X4] &lt; eval[X5]) implies &#x000a;    (eval[K] &lt; eval[X1] implies eval[root] = 0)&#x000a;  (eval[X1] &lt; eval[X2] and eval[X2] &lt; eval[X3] and eval[X3] &lt; eval[X4] and eval[X4] &lt; eval[X5]) implies &#x000a;    (eval[K] &gt; eval[X5] implies eval[root] = 5)&#x000a;&#x000a;  (eval[X1] &lt; eval[X2] and eval[X2] &lt; eval[X3] and eval[X3] &lt; eval[X4] and eval[X4] &lt; eval[X5]) implies &#x000a;    ((eval[K] &gt; eval[X1] and eval[K] &lt; eval[X2]) implies eval[root] = 1)&#x000a;  (eval[X1] &lt; eval[X2] and eval[X2] &lt; eval[X3] and eval[X3] &lt; eval[X4] and eval[X4] &lt; eval[X5]) implies &#x000a;    ((eval[K] &gt; eval[X2] and eval[K] &lt; eval[X3]) implies eval[root] = 2)&#x000a;  (eval[X1] &lt; eval[X2] and eval[X2] &lt; eval[X3] and eval[X3] &lt; eval[X4] and eval[X4] &lt; eval[X5]) implies &#x000a;    ((eval[K] &gt; eval[X3] and eval[K] &lt; eval[X4]) implies eval[root] = 3)&#x000a;  (eval[X1] &lt; eval[X2] and eval[X2] &lt; eval[X3] and eval[X3] &lt; eval[X4] and eval[X4] &lt; eval[X5]) implies &#x000a;    ((eval[K] &gt; eval[X4] and eval[K] &lt; eval[X5]) implies eval[root] = 4)&#x000a;}&#x000a;&#x000a;run {&#x000a;  some root: IntNode {&#x000a;    all env: Var -&gt; one Int {&#x000a;      some eval: Node -&gt; one (Int+Bool) |{ &#x000a;        env in eval&#x000a;        semantics[eval]&#x000a;      } |{&#x000a;        spec[root, eval]&#x000a;      }&#x000a;    }&#x000a;  }&#x000a;} for 22 but 0..6 Int, exactly 6 ITE, exactly 4 LT&#x000a;"/>
+
+<source filename="/$alloy4$/models/util/integer.als" content="module util/integer&#x000a;&#x000a;/*&#x000a; * A collection of utility functions for using Integers in Alloy.&#x000a; * Note that integer overflows are silently truncated to the current bitwidth&#x000a; * using the 2&apos;s complement arithmetic, unless the &quot;forbid overfows&quot; option is&#x000a; * turned on, in which case only models that don&apos;t have any overflows are &#x000a; * analyzed. &#x000a; */&#x000a;&#x000a;fun add  [n1, n2: Int] : Int { this/plus[n1, n2] }&#x000a;fun plus [n1, n2: Int] : Int { n1 fun/add n2 }&#x000a;&#x000a;fun sub   [n1, n2: Int] : Int { this/minus[n1, n2] }&#x000a;fun minus [n1, n2: Int] : Int { n1 fun/sub n2 }&#x000a;&#x000a;fun mul [n1, n2: Int] : Int { n1 fun/mul n2 }&#x000a;&#x000a;/**&#x000a; * Performs the division with &quot;round to zero&quot; semantics, except the following 3 cases&#x000a; * 1) if a is 0, then it returns 0&#x000a; * 2) else if b is 0, then it returns 1 if a is negative and -1 if a is positive&#x000a; * 3) else if a is the smallest negative integer, and b is -1, then it returns a&#x000a; */&#x000a;fun div [n1, n2: Int] : Int { n1 fun/div n2 }&#x000a;&#x000a;/** answer is defined to be the unique integer that satisfies &quot;a = ((a/b)*b) + remainder&quot; */&#x000a;fun rem [n1, n2: Int] : Int { n1 fun/rem n2 }&#x000a;&#x000a;/** negate */&#x000a;fun negate [n: Int] : Int { 0 fun/sub n }&#x000a;&#x000a;/** equal to */&#x000a;pred eq [n1, n2: Int] { int[n1] = int[n2] }&#x000a;&#x000a;/** greater than */&#x000a;pred gt [n1, n2: Int] { n1 &gt; n2 }&#x000a;&#x000a;/** less then */&#x000a;pred lt [n1, n2: Int] { n1 &lt; n2 }&#x000a;&#x000a;/** greater than or equal */&#x000a;pred gte [n1, n2: Int] { n1 &gt;= n2 }&#x000a;&#x000a;/** less than or equal */&#x000a;pred lte [n1, n2: Int] { n1 &lt;= n2 }&#x000a;&#x000a;/** integer is zero */&#x000a;pred zero [n: Int] { n = 0 }&#x000a;&#x000a;/** positive */&#x000a;pred pos  [n: Int] { n &gt; 0 }&#x000a;&#x000a;/** negative */&#x000a;pred neg  [n: Int] { n &lt; 0 }&#x000a;&#x000a;/** non-positive */&#x000a;pred nonpos [n: Int] { n &lt;= 0 }&#x000a;&#x000a;/** non-negative */&#x000a;pred nonneg [n: Int] { n &gt;= 0 }&#x000a;&#x000a;/** signum (aka sign or sgn) */&#x000a;fun signum [n: Int] : Int { n&lt;0 =&gt; (0 fun/sub 1) else (n&gt;0 =&gt; 1 else 0) }&#x000a;&#x000a;/**&#x000a; * returns the ith element (zero-based) from the set s&#x000a; * in the ordering of &apos;next&apos;, which is a linear ordering&#x000a; * relation like that provided by util/ordering&#x000a; */&#x000a;fun int2elem[i: Int, next: univ-&gt;univ, s: set univ] : lone s {&#x000a;  {e: s | #^next.e = int i }&#x000a;}&#x000a;&#x000a;/**&#x000a; * returns the index of the element (zero-based) in the&#x000a; * ordering of next, which is a linear ordering relation&#x000a; * like that provided by util/ordering&#x000a; */&#x000a;fun elem2int[e: univ, next: univ-&gt;univ] : lone Int {&#x000a;  Int[#^next.e]&#x000a;}&#x000a;&#x000a;/** returns the largest integer in the current bitwidth */&#x000a;fun max:one Int { fun/max }&#x000a;&#x000a;/** returns the smallest integer in the current bitwidth */&#x000a;fun min:one Int { fun/min }&#x000a;&#x000a;/** maps each integer (except max) to the integer after it */&#x000a;fun next:Int-&gt;Int { fun/next }&#x000a;&#x000a;/** maps each integer (except min) to the integer before it */&#x000a;fun prev:Int-&gt;Int { ~next }&#x000a;&#x000a;/** given a set of integers, return the largest element */&#x000a;fun max [es: set Int]: lone Int { es - es.^prev }&#x000a;&#x000a;/** given a set of integers, return the smallest element */&#x000a;fun min [es: set Int]: lone Int { es - es.^next }&#x000a;&#x000a;/** given an integer, return all integers prior to it */&#x000a;fun prevs [e: Int]: set Int { e.^prev }&#x000a;&#x000a;/** given an integer, return all integers following it */&#x000a;fun nexts [e: Int]: set Int { e.^next }&#x000a;&#x000a;/** returns the larger of the two integers */&#x000a;fun larger [e1, e2: Int]: Int { let a=int[e1], b=int[e2] | (a&lt;b =&gt; b else a) }&#x000a;&#x000a;/** returns the smaller of the two integers */&#x000a;fun smaller [e1, e2: Int]: Int { let a=int[e1], b=int[e2] | (a&lt;b =&gt; a else b) }&#x000a;"/>
+
+</alloy>

@@ -1,0 +1,292 @@
+<alloy builddate="unknown">
+
+<instance maxseq="0" command="Run synthIntNodeI for 0 but 32 int, exactly 7 BvAnd, exactly 3 BvOr, exactly 2 BvShl" filename="/home/aleks/work/projects/alloy-git/extra/models/hol/sygus/zmorton-d4.als">
+
+<intscope bitwidth="32">
+  <atoms kind="AtomSet">
+    <int val="-8"/>
+    <int val="-7"/>
+    <int val="-6"/>
+    <int val="-5"/>
+    <int val="-4"/>
+    <int val="-3"/>
+    <int val="-2"/>
+    <int val="-1"/>
+    <int val="0"/>
+    <int val="1"/>
+    <int val="2"/>
+    <int val="3"/>
+    <int val="4"/>
+    <int val="5"/>
+    <int val="6"/>
+    <int val="7"/>
+    <int val="65535"/>
+    <int val="858993459"/>
+    <int val="1431655765"/>
+  </atoms>
+</intscope>
+<sig label="seq/Int" ID="0" parentID="1" builtin="yes">
+</sig>
+
+<sig label="Int" ID="1" parentID="2" builtin="yes">
+</sig>
+
+<sig label="String" ID="3" parentID="2" builtin="yes">
+</sig>
+
+<sig label="this/I" ID="4" parentID="5" one="yes">
+   <atom label="I$0"/>
+</sig>
+
+<sig label="this/J" ID="6" parentID="5" one="yes">
+   <atom label="J$0"/>
+</sig>
+
+<sig label="synth2/IntVar" ID="5" parentID="7" abstract="yes">
+</sig>
+
+<sig label="this/Hex1" ID="8" parentID="9" one="yes">
+   <atom label="Hex1$0"/>
+</sig>
+
+<sig label="this/Hex2" ID="10" parentID="9" one="yes">
+   <atom label="Hex2$0"/>
+</sig>
+
+<sig label="this/HexFFFF" ID="11" parentID="9" one="yes">
+   <atom label="HexFFFF$0"/>
+</sig>
+
+<sig label="this/Hex33333333" ID="12" parentID="9" one="yes">
+   <atom label="Hex33333333$0"/>
+</sig>
+
+<sig label="this/Hex55555555" ID="13" parentID="9" one="yes">
+   <atom label="Hex55555555$0"/>
+</sig>
+
+<sig label="synth2/IntLit" ID="9" parentID="7" abstract="yes">
+</sig>
+
+<field label="val" ID="14" parentID="9">
+   <tuple> <atom label="Hex1$0"/> <atom label="1"/> </tuple>
+   <tuple> <atom label="Hex2$0"/> <atom label="2"/> </tuple>
+   <tuple> <atom label="HexFFFF$0"/> <atom label="65535"/> </tuple>
+   <tuple> <atom label="Hex33333333$0"/> <atom label="858993459"/> </tuple>
+   <tuple> <atom label="Hex55555555$0"/> <atom label="1431655765"/> </tuple>
+   <types> <type ID="9"/> <type ID="1"/> </types>
+</field>
+
+<sig label="synth2/BvShl" ID="15" parentID="16">
+   <atom label="synth2/BvShl$0"/>
+   <atom label="synth2/BvShl$1"/>
+</sig>
+
+<sig label="synth2/BvShr" ID="17" parentID="16">
+</sig>
+
+<sig label="synth2/BvSha" ID="18" parentID="16">
+</sig>
+
+<sig label="synth2/BvAnd" ID="19" parentID="16">
+   <atom label="synth2/BvAnd$0"/>
+   <atom label="synth2/BvAnd$1"/>
+   <atom label="synth2/BvAnd$2"/>
+   <atom label="synth2/BvAnd$3"/>
+   <atom label="synth2/BvAnd$4"/>
+   <atom label="synth2/BvAnd$5"/>
+   <atom label="synth2/BvAnd$6"/>
+</sig>
+
+<sig label="synth2/BvOr" ID="20" parentID="16">
+   <atom label="synth2/BvOr$0"/>
+   <atom label="synth2/BvOr$1"/>
+   <atom label="synth2/BvOr$2"/>
+</sig>
+
+<sig label="synth2/BvXor" ID="21" parentID="16">
+</sig>
+
+<sig label="synth2/BinaryIntOp" ID="16" parentID="7" abstract="yes">
+</sig>
+
+<field label="left" ID="22" parentID="16">
+   <tuple> <atom label="synth2/BvShl$0"/> <atom label="Hex55555555$0"/> </tuple>
+   <tuple> <atom label="synth2/BvShl$1"/> <atom label="Hex55555555$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$0"/> <atom label="synth2/BvOr$2"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$1"/> <atom label="synth2/BvShl$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$2"/> <atom label="Hex55555555$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$3"/> <atom label="Hex55555555$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$4"/> <atom label="Hex1$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$5"/> <atom label="Hex55555555$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$6"/> <atom label="synth2/BvAnd$3"/> </tuple>
+   <tuple> <atom label="synth2/BvOr$0"/> <atom label="synth2/BvAnd$4"/> </tuple>
+   <tuple> <atom label="synth2/BvOr$1"/> <atom label="J$0"/> </tuple>
+   <tuple> <atom label="synth2/BvOr$2"/> <atom label="synth2/BvOr$1"/> </tuple>
+   <types> <type ID="16"/> <type ID="7"/> </types>
+</field>
+
+<field label="right" ID="23" parentID="16">
+   <tuple> <atom label="synth2/BvShl$0"/> <atom label="synth2/BvAnd$6"/> </tuple>
+   <tuple> <atom label="synth2/BvShl$1"/> <atom label="synth2/BvOr$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$0"/> <atom label="synth2/BvOr$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$1"/> <atom label="synth2/BvAnd$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$2"/> <atom label="synth2/BvShl$1"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$3"/> <atom label="synth2/BvAnd$2"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$4"/> <atom label="I$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$5"/> <atom label="synth2/BvShl$0"/> </tuple>
+   <tuple> <atom label="synth2/BvAnd$6"/> <atom label="Hex2$0"/> </tuple>
+   <tuple> <atom label="synth2/BvOr$0"/> <atom label="J$0"/> </tuple>
+   <tuple> <atom label="synth2/BvOr$1"/> <atom label="synth2/BvAnd$5"/> </tuple>
+   <tuple> <atom label="synth2/BvOr$2"/> <atom label="J$0"/> </tuple>
+   <types> <type ID="16"/> <type ID="7"/> </types>
+</field>
+
+<sig label="synth2/BvNot" ID="24" parentID="25">
+</sig>
+
+<sig label="synth2/UnaryIntOp" ID="25" parentID="7" abstract="yes">
+</sig>
+
+<field label="arg" ID="26" parentID="25">
+   <types> <type ID="25"/> <type ID="7"/> </types>
+</field>
+
+<sig label="synth2/ITE" ID="27" parentID="7">
+</sig>
+
+<field label="condition" ID="28" parentID="27">
+   <types> <type ID="27"/> <type ID="29"/> </types>
+</field>
+
+<field label="then" ID="30" parentID="27">
+   <types> <type ID="27"/> <type ID="7"/> </types>
+</field>
+
+<field label="elsen" ID="31" parentID="27">
+   <types> <type ID="27"/> <type ID="7"/> </types>
+</field>
+
+<sig label="synth2/IntNode" ID="7" parentID="32" abstract="yes">
+</sig>
+
+<sig label="synth2/BoolVar" ID="33" parentID="29" abstract="yes">
+</sig>
+
+<sig label="synth2/BoolLit" ID="34" parentID="29" abstract="yes">
+</sig>
+
+<field label="val" ID="35" parentID="34">
+   <types> <type ID="34"/> <type ID="1"/> </types>
+</field>
+
+<sig label="synth2/Equals" ID="36" parentID="37">
+</sig>
+
+<sig label="synth2/GTE" ID="38" parentID="37">
+</sig>
+
+<sig label="synth2/LTE" ID="39" parentID="37">
+</sig>
+
+<sig label="synth2/GT" ID="40" parentID="37">
+</sig>
+
+<sig label="synth2/LT" ID="41" parentID="37">
+</sig>
+
+<sig label="synth2/IntComp" ID="37" parentID="29" abstract="yes">
+</sig>
+
+<field label="left" ID="42" parentID="37">
+   <types> <type ID="37"/> <type ID="7"/> </types>
+</field>
+
+<field label="right" ID="43" parentID="37">
+   <types> <type ID="37"/> <type ID="7"/> </types>
+</field>
+
+<sig label="synth2/AndInv" ID="44" parentID="45">
+</sig>
+
+<sig label="synth2/OrInv" ID="46" parentID="45">
+</sig>
+
+<sig label="synth2/BoolInvComp" ID="45" parentID="47" abstract="yes">
+</sig>
+
+<field label="invLhs" ID="48" parentID="45">
+   <types> <type ID="45"/> <type ID="1"/> </types>
+</field>
+
+<field label="invRhs" ID="49" parentID="45">
+   <types> <type ID="45"/> <type ID="1"/> </types>
+</field>
+
+<field label="invOut" ID="50" parentID="45">
+   <types> <type ID="45"/> <type ID="1"/> </types>
+</field>
+
+<sig label="synth2/Nand" ID="51" parentID="47">
+</sig>
+
+<sig label="synth2/And" ID="52" parentID="47">
+</sig>
+
+<sig label="synth2/Nor" ID="53" parentID="47">
+</sig>
+
+<sig label="synth2/Or" ID="54" parentID="47">
+</sig>
+
+<sig label="synth2/Xor" ID="55" parentID="47">
+</sig>
+
+<sig label="synth2/BoolComp" ID="47" parentID="29" abstract="yes">
+</sig>
+
+<field label="left" ID="56" parentID="47">
+   <types> <type ID="47"/> <type ID="29"/> </types>
+</field>
+
+<field label="right" ID="57" parentID="47">
+   <types> <type ID="47"/> <type ID="29"/> </types>
+</field>
+
+<sig label="synth2/Not" ID="58" parentID="29">
+</sig>
+
+<field label="arg" ID="59" parentID="58">
+   <types> <type ID="58"/> <type ID="33"/> </types>
+   <types> <type ID="58"/> <type ID="52"/> </types>
+</field>
+
+<sig label="synth2/BoolNode" ID="29" parentID="32" abstract="yes">
+</sig>
+
+<sig label="synth2/Node" ID="32" parentID="2" abstract="yes">
+</sig>
+
+<sig label="univ" ID="2" builtin="yes">
+</sig>
+
+<sig label="Bit" ID="60">
+   <atom label="-1"/>
+   <atom label="0"/>
+   <type ID="1"/>
+</sig>
+
+<skolem label="$synthIntNodeI_root" ID="61">
+   <tuple> <atom label="synth2/BvAnd$1"/> </tuple>
+   <types> <type ID="7"/> </types>
+</skolem>
+
+</instance>
+
+<source filename="/home/aleks/work/projects/alloy-git/extra/models/hol/sygus/zmorton-d4.als" content="module zmorton_d4&#x000a;&#x000a;open synth2[spec]&#x000a;&#x000a;one sig I, J extends IntVar {}&#x000a;one sig Hex1, Hex2, HexFFFF, Hex33333333, Hex55555555 extends IntLit {}&#x000a;//one sig Hex1, Hex2, HexFFFF extends IntLit {}&#x000a;&#x000a;fact {&#x000a;  IntLit&lt;:val = Hex1-&gt;1 + Hex2-&gt;2 + HexFFFF-&gt;0xFFFF + Hex33333333-&gt;0x33333333 + Hex55555555-&gt;0x55555555&#x000a;}&#x000a;&#x000a;--------------------------------------------------------------------------------&#x000a;-- Specification&#x000a;-- (https://github.com/rishabhs/sygus-comp14/blob/master/benchmarks/bitvector-benchmarks/parity-AIG-d0.sl)&#x000a;--------------------------------------------------------------------------------&#x000a;&#x000a;/*pred spec[root: Node, eval: Node -&gt; (Int + Bit)] {&#x000a;  eval[root] = bvor[bvnot[eval[I]], bvnot[eval[J]]]&#x000a;}&#x000a;*/&#x000a;fun zmorton_spec[i, j: Int]: Int {&#x000a;  bvor[bvand[0x55555555, bvor[bvand[0x33333333, bvor[bvshl[bvand[0xFFFF, j], 2], bvand[0xFFFF, j]]], &#x000a;                              bvshl[bvand[0x33333333, bvor[bvshl[bvand[0xFFFF, j], 2], bvand[0xFFFF, j]]], 1]]], &#x000a;       bvshl[bvand[0x55555555, bvor[bvshl[bvand[0x33333333, bvor[bvshl[bvand[0xFFFF, i], 2], bvand[0xFFFF, i]]], 1], &#x000a;                                    bvand[0x33333333, bvor[bvshl[bvand[0xFFFF, i], 2], bvand[0xFFFF, i]]]]], 1]]&#x000a;}&#x000a;&#x000a;fun zmorton_impl[root: Node, eval: Node -&gt; (Int + Bit)]: Int {&#x000a;  eval[root]&#x000a;}&#x000a;&#x000a;pred spec[root: Node, eval: Node -&gt; (Int + Bit)] {&#x000a;  let i = eval[I], j = eval[J] |&#x000a;    zmorton_spec[i, j] = bvor[zmorton_impl[root, eval], &#x000a;                              bvshl[bvand[0x55555555, bvor[bvshl[bvand[0x33333333, bvor[bvshl[bvand[0xFFFF, i], 2], &#x000a;                                                                                       bvand[0xFFFF, i]]], 1], &#x000a;                                                           bvand[0x33333333, bvor[bvshl[bvand[0xFFFF, i], 2], &#x000a;                                                                                 bvand[0xFFFF, i]]]]], 1]]&#x000a;}&#x000a;&#x000a;--------------------------------------------------------------------------------&#x000a;-- Commands&#x000a;--------------------------------------------------------------------------------&#x000a;&#x000a;// run synthIntNodeI for 0 but {bitwidth: 32, atoms: -8..7} Int, exactly 1 BvAnd, exactly 1 BvNot&#x000a;&#x000a;run synthIntNodeI for 0 but {bitwidth: 32, atoms: [literals, bw(4)]} Int, &#x000a;                            exactly 7 BvAnd, exactly 3 BvOr, exactly 2 BvShl&#x000a;&#x000a;"/>
+
+<source filename="/$alloy4$/models/util/integer.als" content="module util/integer&#x000a;&#x000a;/*&#x000a; * A collection of utility functions for using Integers in Alloy.&#x000a; * Note that integer overflows are silently truncated to the current bitwidth&#x000a; * using the 2&apos;s complement arithmetic, unless the &quot;forbid overfows&quot; option is&#x000a; * turned on, in which case only models that don&apos;t have any overflows are &#x000a; * analyzed. &#x000a; */&#x000a;&#x000a;fun add  [n1, n2: Int] : Int { this/plus[n1, n2] }&#x000a;fun plus [n1, n2: Int] : Int { n1 fun/add n2 }&#x000a;&#x000a;fun sub   [n1, n2: Int] : Int { this/minus[n1, n2] }&#x000a;fun minus [n1, n2: Int] : Int { n1 fun/sub n2 }&#x000a;&#x000a;fun mul [n1, n2: Int] : Int { n1 fun/mul n2 }&#x000a;&#x000a;fun bvnot [n: Int]      : Int { fun/bvnot n     }&#x000a;fun bvand [n1, n2: Int] : Int { n1 fun/bvand n2 }&#x000a;fun bvxor [n1, n2: Int] : Int { n1 fun/bvxor n2 }&#x000a;fun bvor  [n1, n2: Int] : Int { n1 fun/bvor n2  }&#x000a;fun bvshl [n1, n2: Int] : Int { n1 fun/bvshl n2 }&#x000a;fun bvshr [n1, n2: Int] : Int { n1 fun/bvshr n2 }&#x000a;fun bvsha [n1, n2: Int] : Int { n1 fun/bvsha n2 }&#x000a;&#x000a;fun Not [n: Int]      : Int { this/bvnot[n] }&#x000a;fun And [n1, n2: Int] : Int { this/bvand[n1, n2] }&#x000a;fun Nand[n1, n2: Int] : Int { this/bvnot[this/bvand[n1, n2]] }&#x000a;fun Or  [n1, n2: Int] : Int { this/bvor[n1, n2] }&#x000a;fun Nor [n1, n2: Int] : Int { this/bvnot[this/bvor[n1, n2]] }&#x000a;fun Xor [n1, n2: Int] : Int { this/bvxor[n1, n2] }&#x000a;&#x000a;fun BitTrue  : Bit { -1 }&#x000a;fun BitFalse : Bit { 0 }&#x000a;&#x000a;/**&#x000a; * Performs the division with &quot;round to zero&quot; semantics, except the following 3 cases&#x000a; * 1) if a is 0, then it returns 0&#x000a; * 2) else if b is 0, then it returns 1 if a is negative and -1 if a is positive&#x000a; * 3) else if a is the smallest negative integer, and b is -1, then it returns a&#x000a; */&#x000a;fun div [n1, n2: Int] : Int { n1 fun/div n2 }&#x000a;&#x000a;/** answer is defined to be the unique integer that satisfies &quot;a = ((a/b)*b) + remainder&quot; */&#x000a;fun rem [n1, n2: Int] : Int { n1 fun/rem n2 }&#x000a;&#x000a;/** negate */&#x000a;fun negate [n: Int] : Int { 0 fun/sub n }&#x000a;&#x000a;/** equal to */&#x000a;pred eq [n1, n2: Int] { int[n1] = int[n2] }&#x000a;&#x000a;/** greater than */&#x000a;pred gt [n1, n2: Int] { n1 &gt; n2 }&#x000a;&#x000a;/** less then */&#x000a;pred lt [n1, n2: Int] { n1 &lt; n2 }&#x000a;&#x000a;/** greater than or equal */&#x000a;pred gte [n1, n2: Int] { n1 &gt;= n2 }&#x000a;&#x000a;/** less than or equal */&#x000a;pred lte [n1, n2: Int] { n1 &lt;= n2 }&#x000a;&#x000a;/** integer is zero */&#x000a;pred zero [n: Int] { n = 0 }&#x000a;&#x000a;/** positive */&#x000a;pred pos  [n: Int] { n &gt; 0 }&#x000a;&#x000a;/** negative */&#x000a;pred neg  [n: Int] { n &lt; 0 }&#x000a;&#x000a;/** non-positive */&#x000a;pred nonpos [n: Int] { n &lt;= 0 }&#x000a;&#x000a;/** non-negative */&#x000a;pred nonneg [n: Int] { n &gt;= 0 }&#x000a;&#x000a;/** signum (aka sign or sgn) */&#x000a;fun signum [n: Int] : Int { n&lt;0 =&gt; (0 fun/sub 1) else (n&gt;0 =&gt; 1 else 0) }&#x000a;&#x000a;/**&#x000a; * returns the ith element (zero-based) from the set s&#x000a; * in the ordering of &apos;next&apos;, which is a linear ordering&#x000a; * relation like that provided by util/ordering&#x000a; */&#x000a;fun int2elem[i: Int, next: univ-&gt;univ, s: set univ] : lone s {&#x000a;  {e: s | #^next.e = int i }&#x000a;}&#x000a;&#x000a;/**&#x000a; * returns the index of the element (zero-based) in the&#x000a; * ordering of next, which is a linear ordering relation&#x000a; * like that provided by util/ordering&#x000a; */&#x000a;fun elem2int[e: univ, next: univ-&gt;univ] : lone Int {&#x000a;  Int[#^next.e]&#x000a;}&#x000a;&#x000a;/** returns the largest integer in the current bitwidth */&#x000a;fun max:one Int { fun/max }&#x000a;&#x000a;/** returns the smallest integer in the current bitwidth */&#x000a;fun min:one Int { fun/min }&#x000a;&#x000a;/** maps each integer (except max) to the integer after it */&#x000a;fun next:Int-&gt;Int { fun/next }&#x000a;&#x000a;/** maps each integer (except min) to the integer before it */&#x000a;fun prev:Int-&gt;Int { ~next }&#x000a;&#x000a;/** given a set of integers, return the largest element */&#x000a;fun max [es: set Int]: lone Int { es - es.^prev }&#x000a;&#x000a;/** given a set of integers, return the smallest element */&#x000a;fun min [es: set Int]: lone Int { es - es.^next }&#x000a;&#x000a;/** given an integer, return all integers prior to it */&#x000a;fun prevs [e: Int]: set Int { e.^prev }&#x000a;&#x000a;/** given an integer, return all integers following it */&#x000a;fun nexts [e: Int]: set Int { e.^next }&#x000a;&#x000a;/** returns the larger of the two integers */&#x000a;fun larger [e1, e2: Int]: Int { let a=int[e1], b=int[e2] | (a&lt;b =&gt; b else a) }&#x000a;&#x000a;/** returns the smaller of the two integers */&#x000a;fun smaller [e1, e2: Int]: Int { let a=int[e1], b=int[e2] | (a&lt;b =&gt; a else b) }&#x000a;"/>
+
+<source filename="/home/aleks/work/projects/alloy-git/extra/models/hol/sygus/synth2.als" content="module synth2&lt;spec&gt;&#x000a;&#x000a;open util/integer as b&#x000a;&#x000a;--------------------------------------------------------------------------------&#x000a;-- Values&#x000a;--------------------------------------------------------------------------------&#x000a;/* use the builtin Int and Bit */&#x000a;&#x000a;--------------------------------------------------------------------------------&#x000a;-- AST Nodes&#x000a;--------------------------------------------------------------------------------&#x000a;abstract sig Node {}&#x000a;abstract sig BoolNode extends Node {}&#x000a;abstract sig IntNode  extends Node {}&#x000a;&#x000a;---------------------------------------------&#x000a;-- BoolNodes&#x000a;---------------------------------------------&#x000a;&#x000a;abstract sig BoolVar extends BoolNode {}&#x000a;&#x000a;abstract sig BoolLit extends BoolNode {&#x000a;  val: one Bit&#x000a;}&#x000a;&#x000a;abstract sig IntComp  extends BoolNode {&#x000a;  left, right: one IntNode&#x000a;}&#x000a;abstract sig BoolComp extends BoolNode {&#x000a;  left, right: one BoolNode&#x000a;}&#x000a;abstract sig BoolInvComp extends BoolComp {&#x000a;  invLhs, invRhs, invOut: one Bit&#x000a;}&#x000a;&#x000a;sig Equals, GTE, LTE, GT, LT extends IntComp {}&#x000a;sig Nand, And, Nor, Or, Xor extends BoolComp {}&#x000a;sig Not extends BoolNode {&#x000a;  arg: one (BoolVar + And) // one BoolNode&#x000a;}&#x000a;&#x000a;sig AndInv, OrInv extends BoolInvComp {}&#x000a;&#x000a;---------------------------------------------&#x000a;-- IntNodes&#x000a;---------------------------------------------&#x000a;&#x000a;abstract sig IntVar extends IntNode {}&#x000a;&#x000a;abstract sig IntLit extends IntNode {&#x000a;  val: one Int&#x000a;}&#x000a;&#x000a;abstract sig BinaryIntOp extends IntNode {&#x000a;  left, right: one IntNode&#x000a;}&#x000a;abstract sig UnaryIntOp extends IntNode {&#x000a;  arg: one IntNode&#x000a;}&#x000a;&#x000a;sig BvShl, BvShr, BvSha, BvAnd, BvOr, BvXor extends BinaryIntOp {}&#x000a;sig BvNot extends UnaryIntOp {}&#x000a;&#x000a;sig ITE extends IntNode {&#x000a;  condition: one BoolNode,&#x000a;  then: one IntNode,&#x000a;  elsen: one IntNode&#x000a;}&#x000a;&#x000a;--------------------------------------------------------------------------------&#x000a;-- Semantics&#x000a;--------------------------------------------------------------------------------&#x000a;pred semantics[eval: Node -&gt; (Int + Bit)] {&#x000a;  all n: ITE {&#x000a;    /*eval[n] in Int&#x000a;    eval[n.condition] in Bit&#x000a;    eval[n.then] in Int&#x000a;    eval[n.elsen] in Int*/&#x000a;    eval[n.condition] = BitTrue implies&#x000a;      eval[n.then] = eval[n] else eval[n.elsen] = eval[n]&#x000a;  }&#x000a;&#x000a;  all n: IntNode  | one eval[n] and eval[n] in Int&#x000a;  all n: BoolNode | one eval[n] and eval[n] in Bit&#x000a;  &#x000a;  // redundant stuff&#x000a;  /*&#x000a;  all n: IntComp  | eval[n.left] in Int and eval[n.right] in Int&#x000a;  all n: BoolComp | eval[n.left] in Bit and eval[n.right] in Bit&#x000a;  all n: Not      | eval[n.arg] in Bit&#x000a;  all v: IntVar   | one eval[v] and eval[v] in Int&#x000a;  all v: BoolVar  | one eval[v] and eval[v] in Bit&#x000a;  */&#x000a;  // ---------------&#x000a;&#x000a;  all n: Equals   | eval[n.left] = eval[n.right] implies&#x000a;                      eval[n] = BitTrue else eval[n] = BitFalse&#x000a;  all n: GTE      | eval[n.left] &gt;= eval[n.right] implies&#x000a;                      eval[n] = BitTrue else eval[n] = BitFalse&#x000a;  all n: LTE      | eval[n.left] &lt;= eval[n.right] implies&#x000a;                      eval[n] = BitTrue else eval[n] = BitFalse&#x000a;  all n: GT       | eval[n.left] &gt; eval[n.right] implies&#x000a;                      eval[n] = BitTrue else eval[n] = BitFalse&#x000a;  all n: LT       | eval[n.left] &lt; eval[n.right] implies&#x000a;                      eval[n] = BitTrue else eval[n] = BitFalse&#x000a;&#x000a;  all n: And      | eval[n] = And[eval[n.left], eval[n.right]]&#x000a;  all n: Nand     | eval[n] = Nand[eval[n.left], eval[n.right]]&#x000a;  all n: Or       | eval[n] = Or [eval[n.left], eval[n.right]]&#x000a;  all n: Nor      | eval[n] = Nor[eval[n.left], eval[n.right]]&#x000a;  all n: Xor      | eval[n] = Xor[eval[n.left], eval[n.right]]&#x000a;  all n: Not      | eval[n] = Not[eval[n.arg]]&#x000a;&#x000a;  all n: BvShl    | eval[n] = bvshl[eval[n.left], eval[n.right]]&#x000a;  all n: BvShr    | eval[n] = bvshr[eval[n.left], eval[n.right]]&#x000a;  all n: BvSha    | eval[n] = bvsha[eval[n.left], eval[n.right]]&#x000a;  all n: BvAnd    | eval[n] = bvand[eval[n.left], eval[n.right]]&#x000a;  all n: BvOr     | eval[n] = bvor[eval[n.left], eval[n.right]]&#x000a;  all n: BvXor    | eval[n] = bvxor[eval[n.left], eval[n.right]]&#x000a;  all n: BvNot    | eval[n] = bvnot[eval[n.arg]]&#x000a;&#x000a;  all n: AndInv   | eval[n] = Xor[And[Xor[eval[n.left], n.invLhs], Xor[eval[n.right], n.invRhs]], n.invOut]&#x000a;  all n: OrInv    | eval[n] = Xor[Or[Xor[eval[n.left], n.invLhs], Xor[eval[n.right], n.invRhs]], n.invOut]&#x000a;&#x000a;  all i: IntLit   | eval[i] = i.val &#x000a;  all b: BoolLit  | eval[b] = b.val &#x000a;}&#x000a;&#x000a;--------------------------------------------------------------------------------&#x000a;-- Facts&#x000a;--------------------------------------------------------------------------------&#x000a;pred acyclic[r: univ-&gt;univ, s: set univ] {&#x000a;  all x: s | x !in x.^r&#x000a;}&#x000a;&#x000a;fun binRels[]: Node -&gt; Node {&#x000a;  condition + then + elsen +&#x000a;   IntComp&lt;:left + BoolComp&lt;:left + BinaryIntOp&lt;:left + &#x000a;   IntComp&lt;:right + BoolComp&lt;:right + BinaryIntOp&lt;:right +&#x000a;   Not&lt;:arg + UnaryIntOp&lt;:arg&#x000a;}&#x000a;&#x000a;fact {&#x000a;  acyclic[binRels, Node]&#x000a;}&#x000a;&#x000a;--------------------------------------------------------------------------------&#x000a;-- Synthesis predicate&#x000a;--------------------------------------------------------------------------------&#x000a;pred allVarsReachableFrom[root: Node] {&#x000a;  all v: BoolVar + IntVar |&#x000a;    v in root.^(binRels)&#x000a;}&#x000a;&#x000a;pred synth[root: Node] {&#x000a;  allVarsReachableFrom[root]&#x000a;  all envI: IntVar -&gt; one Int {&#x000a;  all envB: BoolVar -&gt; one Bit {&#x000a;    some eval: IntNode-&gt;Int + BoolNode-&gt;Bit when {&#x000a;      envI in eval&#x000a;      envB in eval&#x000a;      semantics[eval]&#x000a;    }{&#x000a;      spec[root, eval]&#x000a;    }&#x000a;  }&#x000a;  }&#x000a;}&#x000a;&#x000a;pred synthI[root: Node] {&#x000a;  allVarsReachableFrom[root]&#x000a;  all envI: IntVar -&gt; one Int {&#x000a;    some eval: IntNode-&gt;Int + BoolNode-&gt;Bit when {&#x000a;      envI in eval&#x000a;      semantics[eval]&#x000a;    }{&#x000a;      spec[root, eval]&#x000a;    }&#x000a;  }&#x000a;}&#x000a;&#x000a;pred synthB[root: Node] {&#x000a;  allVarsReachableFrom[root]&#x000a;  all envB: BoolVar -&gt; one Bit {&#x000a;    some eval: IntNode-&gt;Int + BoolNode-&gt;Bit when {&#x000a;      envB in eval&#x000a;      semantics[eval]&#x000a;    }{&#x000a;      spec[root, eval]&#x000a;    }&#x000a;  }&#x000a;}&#x000a;&#x000a;pred synthIntNode[root: IntNode]    { synth[root] }&#x000a;pred synthIntNodeI[root: IntNode]   { synthI[root] }&#x000a;pred synthIntNodeB[root: IntNode]   { synthB[root] }&#x000a;&#x000a;pred synthBoolNode[root: BoolNode]  { synth[root] }&#x000a;pred synthBoolNodeI[root: BoolNode] { synthI[root] }&#x000a;pred synthBoolNodeB[root: BoolNode] { synthB[root] }&#x000a;"/>
+
+</alloy>
