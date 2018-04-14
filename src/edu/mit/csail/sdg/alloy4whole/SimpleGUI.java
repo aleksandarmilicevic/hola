@@ -1867,7 +1867,6 @@ public final class SimpleGUI implements ComponentListener, Listener {
         // If on Mac, then register an application listener
         try {
             wrap = true;
-            if (Util.onMac()) MacUtil.registerApplicationListener(doShow(), doAbout(), doOpenFile(""), doQuit());
         } finally {
             wrap = false;
         }
