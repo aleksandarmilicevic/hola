@@ -11,7 +11,7 @@ More documentation can be found at: http://alloy.mit.edu/alloy/hola
 
 ## Download
 
-  * [v0.3](https://github.com/aleksandarmilicevic/hola/releases/download/v0.3/hola-0.3_2017-06-04.jar)
+  * [v0.3](https://github.com/aleksandarmilicevic/hola/releases/download/v0.3_2018-04-14/hola-0.3_2018-04-14.jar)
 
 ## Compile from sources
 
