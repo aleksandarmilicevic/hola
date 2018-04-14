@@ -355,7 +355,7 @@ final class BoundsComputer {
               Type t = isOne ? Sig.UNIV.type().join(f.type()) : f.type();
               //compute upper
               TupleSet ub = factory.noneOf(t.arity());
-              for(List<PrimSig> p:t.fold()) {
+              for(List<PrimSig> p : t.fold()) {
                  TupleSet upper=null;
                  int col = 0;
                  for(PrimSig b:p) {
@@ -364,7 +364,7 @@ final class BoundsComputer {
                     TupleSet tmp = null;
                     if (col > 0 && kkExpr == ConstantExpression.INTS && (scope=extractScope(f.bound, col-1)) != null) {
                         tmp = factory.setOf(scope.enumerateAsString().toArray());
-                    } else if (kkExpr == ConstantExpression.INTS && kkBound != null) {
+                    } else if (kkExpr == ConstantExpression.INTS && kkBound != null && kkBound.arity() == 1) {
                         tmp = sol.query(true, kkBound, false);
                     } else {
                         tmp = sol.query(true, kkExpr, false);
