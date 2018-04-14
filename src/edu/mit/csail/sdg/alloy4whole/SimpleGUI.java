@@ -1682,15 +1682,6 @@ public final class SimpleGUI implements ComponentListener, Listener {
            System.setProperty("com.apple.macos.useScreenMenuBar","true");
            System.setProperty("apple.laf.useScreenMenuBar","true");
         }
-        if (Util.onMac()) {
-           Application.getApplication().addPreferencesMenuItem();
-           Application.getApplication().addAboutMenuItem();
-           Application.getApplication().addApplicationListener(new ApplicationAdapter() {
-              @Override public void handleAbout(ApplicationEvent ae)       { doAbout(); }
-              @Override public void handlePreferences(ApplicationEvent ae) { doPreferences(); }
-              @Override public void handleQuit(ApplicationEvent arg0)      { doQuit(); }
-           });
-        }
 
         doLookAndFeel();
 
@@ -1809,7 +1800,7 @@ public final class SimpleGUI implements ComponentListener, Listener {
             windowmenu  = menu(bar,  "&Window",  doRefreshWindow(false));
             windowmenu2 = menu(null, "&Window",  doRefreshWindow(true));
             helpmenu    = menu(bar,  "&Help",    null);
-            if (!Util.onMac()) menuItem(helpmenu, "About Alloy...", 'A', doAbout());
+            menuItem(helpmenu, "About Alloy...", 'A', doAbout());
             menuItem(helpmenu, "Quick Guide",                       'Q', doHelp());
             menuItem(helpmenu, "See the Copyright Notices...",      'L', doLicense());
         } finally {
