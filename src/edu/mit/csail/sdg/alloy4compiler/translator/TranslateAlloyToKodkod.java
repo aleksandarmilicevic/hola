@@ -1033,7 +1033,7 @@ public final class TranslateAlloyToKodkod extends VisitReturn<Object> {
       Formula grds = Formula.and(guards);
       Formula qBody = isSome ? grds.and(ans) : grds.implies(ans);
       // add quards to domain constraint as well (only relevant for higher-order solving)
-      Formula qDom = opt.higherOrderSolver ? grds.and(kkDom) : kkDom;
+      Formula qDom = (opt != null && opt.higherOrderSolver) ? grds.and(kkDom) : kkDom;
       return qBody.quantify(quantOp, dd, qDom);
 
 //      if (op==ExprQt.Op.SOME) {
