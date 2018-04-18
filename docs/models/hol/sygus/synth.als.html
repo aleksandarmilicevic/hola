@@ -1,0 +1,109 @@
+<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="http://alloy.mit.edu/alloy/hola/css/alloy.css"/></head><body>
+<div class="highlight"><pre><span class="kn">module</span> <span class="nn">synth</span><span class="o">&lt;</span><span class="n">spec</span><span class="o">&gt;</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Values</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">Bool</span> <span class="o">{}</span>
+<span class="k">one</span> <span class="kd">sig</span> <span class="nc">BoolTrue</span> <span class="k">extends</span> <span class="n">Bool</span> <span class="o">{}</span>
+<span class="k">one</span> <span class="kd">sig</span> <span class="nc">BoolFalse</span> <span class="k">extends</span> <span class="n">Bool</span> <span class="o">{}</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- AST Nodes</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">Node</span> <span class="o">{}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">BoolNode</span> <span class="k">extends</span> <span class="n">Node</span> <span class="o">{}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">IntNode</span>  <span class="k">extends</span> <span class="n">Node</span> <span class="o">{}</span>
+
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">IntComp</span>  <span class="k">extends</span> <span class="n">BoolNode</span> <span class="o">{</span>
+  <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">IntNode</span>
+<span class="o">}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">BoolComp</span> <span class="k">extends</span> <span class="n">BoolNode</span> <span class="o">{</span>
+  <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">BoolNode</span>
+<span class="o">}</span>
+
+<span class="kd">sig</span> <span class="nc">Equals</span><span class="p">,</span> <span class="nc">GTE</span><span class="p">,</span> <span class="nc">LTE</span><span class="p">,</span> <span class="nc">GT</span><span class="p">,</span> <span class="nc">LT</span> <span class="k">extends</span> <span class="n">IntComp</span> <span class="o">{}</span>
+<span class="kd">sig</span> <span class="nc">And</span><span class="p">,</span> <span class="nc">Or</span> <span class="k">extends</span> <span class="n">BoolComp</span> <span class="o">{}</span>
+<span class="kd">sig</span> <span class="nc">Not</span> <span class="k">extends</span> <span class="n">BoolNode</span> <span class="o">{</span>
+  <span class="n">arg</span><span class="p">:</span> <span class="n">BoolNode</span>
+<span class="o">}</span>
+
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">Var</span> <span class="k">extends</span> <span class="n">IntNode</span> <span class="o">{}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">IntLit</span> <span class="k">extends</span> <span class="n">IntNode</span> <span class="o">{</span>
+  <span class="n">val</span><span class="p">:</span> <span class="k">one</span> <span class="kt">Int</span>
+<span class="o">}</span>
+
+<span class="kd">sig</span> <span class="nc">ITE</span> <span class="k">extends</span> <span class="n">IntNode</span> <span class="o">{</span>
+  <span class="n">condition</span><span class="p">:</span> <span class="n">BoolNode</span><span class="p">,</span>
+  <span class="n">then</span><span class="p">:</span> <span class="n">IntNode</span><span class="p">,</span>
+  <span class="n">elsen</span><span class="p">:</span> <span class="n">IntNode</span>
+<span class="o">}</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Semantics</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="k">pred</span> <span class="nf">semantics</span><span class="o">[</span><span class="n">eval</span><span class="p">:</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="kt">Int</span> <span class="o">+</span> <span class="n">Bool</span><span class="o">)]</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">ITE</span> <span class="o">{</span>
+    <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span>
+    <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">condition</span><span class="o">]</span> <span class="ow">in</span> <span class="n">Bool</span>
+    <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">then</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span>
+    <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">elsen</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span>
+    <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">condition</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="ow">implies</span>
+      <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">then</span><span class="o">]</span> <span class="o">=</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">elsen</span><span class="o">]</span> <span class="o">=</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span>
+  <span class="o">}</span>
+
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">BoolNode</span> <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="ow">in</span> <span class="n">Bool</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">IntComp</span>  <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">BoolComp</span> <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="ow">in</span> <span class="n">Bool</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">in</span> <span class="n">Bool</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">Not</span>      <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">arg</span><span class="o">]</span> <span class="ow">in</span> <span class="n">Bool</span>
+
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">Equals</span>   <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">implies</span>
+                      <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">GTE</span>      <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">implies</span>
+                      <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">LTE</span>      <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">implies</span>
+                      <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">GT</span>       <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">implies</span>
+                      <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">LT</span>       <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">implies</span>
+                      <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">And</span>      <span class="o">|</span> <span class="o">(</span><span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span><span class="o">)</span> <span class="ow">implies</span>
+                     <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">Or</span>       <span class="o">|</span> <span class="o">(</span><span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="ow">or</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span><span class="o">)</span> <span class="ow">implies</span>
+                     <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">Not</span>      <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">arg</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span> <span class="ow">implies</span>
+                     <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+
+  <span class="k">all</span> <span class="n">v</span><span class="p">:</span> <span class="n">Var</span>      <span class="o">|</span> <span class="k">one</span> <span class="n">eval</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span>
+  <span class="k">all</span> <span class="n">i</span><span class="p">:</span> <span class="n">IntLit</span>   <span class="o">|</span> <span class="k">one</span> <span class="n">eval</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">val</span>
+<span class="o">}</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Facts</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="k">pred</span> <span class="nf">acyclic</span><span class="o">[</span><span class="n">r</span><span class="p">:</span> <span class="kc">univ</span><span class="o">-&gt;</span><span class="kc">univ</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="k">set</span> <span class="kc">univ</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">x</span><span class="p">:</span> <span class="n">s</span> <span class="o">|</span> <span class="n">x</span> <span class="o">!</span><span class="ow">in</span> <span class="n">x</span><span class="o">.^</span><span class="n">r</span>
+<span class="o">}</span>
+
+<span class="k">fact</span> <span class="o">{</span>
+  <span class="n">acyclic</span><span class="o">[</span><span class="n">condition</span><span class="o">+</span><span class="n">then</span><span class="o">+</span><span class="n">elsen</span><span class="o">+</span><span class="n">IntComp</span><span class="o">&lt;</span><span class="p">:</span><span class="n">left</span><span class="o">+</span><span class="n">BoolComp</span><span class="o">&lt;</span><span class="p">:</span><span class="n">left</span><span class="o">+</span><span class="n">IntComp</span><span class="o">&lt;</span><span class="p">:</span><span class="n">right</span><span class="o">+</span><span class="n">BoolComp</span><span class="o">&lt;</span><span class="p">:</span><span class="n">right</span><span class="o">+</span><span class="n">arg</span><span class="p">,</span> <span class="n">Node</span><span class="o">]</span>
+<span class="o">}</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Synthesis predicate</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="k">pred</span> <span class="nf">synth</span><span class="o">[</span><span class="n">root</span><span class="p">:</span> <span class="n">IntNode</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">env</span><span class="p">:</span> <span class="n">Var</span> <span class="o">-&gt;</span> <span class="k">one</span> <span class="kt">Int</span> <span class="o">{</span>
+    <span class="k">some</span> <span class="n">eval</span><span class="p">:</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="k">one</span> <span class="o">(</span><span class="kt">Int</span><span class="o">+</span><span class="n">Bool</span><span class="o">)</span> <span class="k">when</span> <span class="o">{</span>
+      <span class="n">env</span> <span class="ow">in</span> <span class="n">eval</span>
+      <span class="n">semantics</span><span class="o">[</span><span class="n">eval</span><span class="o">]</span>
+    <span class="o">}{</span>
+      <span class="n">spec</span><span class="o">[</span><span class="n">root</span><span class="p">,</span> <span class="n">eval</span><span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+</body></html>

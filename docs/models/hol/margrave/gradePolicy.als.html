@@ -1,0 +1,81 @@
+<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="http://alloy.mit.edu/alloy/hola/css/alloy.css"/></head><body>
+<div class="highlight"><pre><span class="c1">///*</span>
+<span class="c1">// * A model of grade assignment policy</span>
+<span class="c1">// * Demonstrates automated synthesis of policies in Alloy*</span>
+<span class="c1">// * Based on the running example from the paper</span>
+<span class="c1">// *   &quot;Verification and change-impact analysis of access-control policies&quot; by</span>
+<span class="c1">// * 	 Kathi Fisler, Shriram Krishnamurthi, Leo A. Meyerovich, Michael Carl Tschantz, ICSE 2005.</span>
+<span class="c1">// */</span>
+ <span class="kn">module</span> <span class="nn">GradePolicy</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Basic signatures</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">Resource</span> <span class="o">{}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">Action</span> <span class="o">{}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">Role</span> <span class="o">{}</span>
+<span class="kd">sig</span> <span class="nc">User</span> <span class="o">{}</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Domain-specific signatures</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+
+<span class="k">one</span> <span class="kd">sig</span> <span class="nc">Faculty</span><span class="p">,</span> <span class="nc">Student</span><span class="p">,</span> <span class="nc">TA</span> <span class="k">extends</span> <span class="n">Role</span> <span class="o">{}</span>
+<span class="k">one</span> <span class="kd">sig</span> <span class="nc">IntGrade</span><span class="p">,</span> <span class="nc">ExtGrade</span>   <span class="k">extends</span> <span class="n">Resource</span> <span class="o">{}</span>
+<span class="k">one</span> <span class="kd">sig</span> <span class="nc">Assign</span><span class="p">,</span> <span class="nc">Receive</span>      <span class="k">extends</span> <span class="n">Action</span> <span class="o">{}</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Properties</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+
+<span class="cm">/* no student can assign external grade */</span>
+<span class="k">pred</span> <span class="nf">prop1</span><span class="o">[</span><span class="n">roles</span> <span class="p">:</span> <span class="n">User</span><span class="o">-&gt;</span><span class="n">Role</span><span class="p">,</span> <span class="n">performs</span> <span class="p">:</span> <span class="n">User</span><span class="o">-&gt;</span><span class="n">Action</span><span class="o">-&gt;</span><span class="n">Resource</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">no</span> <span class="n">u</span><span class="p">:</span> <span class="n">User</span> <span class="o">|</span> <span class="n">u</span><span class="o">.</span><span class="n">roles</span> <span class="o">=</span> <span class="n">Student</span> <span class="ow">and</span> <span class="n">Assign</span><span class="o">-&gt;</span><span class="n">ExtGrade</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">performs</span>
+<span class="o">}</span>
+
+<span class="cm">/* no user can both receive and assign external grades */</span>
+<span class="k">pred</span> <span class="nf">prop2</span><span class="o">[</span><span class="n">roles</span> <span class="p">:</span> <span class="n">User</span><span class="o">-&gt;</span><span class="n">Role</span><span class="p">,</span> <span class="n">performs</span> <span class="p">:</span> <span class="n">User</span><span class="o">-&gt;</span><span class="n">Action</span><span class="o">-&gt;</span><span class="n">Resource</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">no</span> <span class="n">u</span><span class="p">:</span> <span class="n">User</span> <span class="o">|</span> <span class="n">Assign</span> <span class="o">+</span> <span class="n">Receive</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">performs</span><span class="o">.</span><span class="n">ExtGrade</span>
+<span class="o">}</span>
+
+<span class="cm">/* &#39;performs&#39; describes the behavior of users */</span>
+<span class="k">pred</span> <span class="nf">enforce</span><span class="o">[</span><span class="n">acl</span><span class="p">:</span>      <span class="n">Role</span><span class="o">-&gt;</span><span class="n">Action</span><span class="o">-&gt;</span><span class="n">Resource</span><span class="p">,</span>
+             <span class="n">roles</span><span class="p">:</span>    <span class="n">User</span><span class="o">-&gt;</span><span class="n">Role</span><span class="p">,</span>
+             <span class="n">performs</span><span class="p">:</span> <span class="n">User</span><span class="o">-&gt;</span><span class="n">Action</span><span class="o">-&gt;</span><span class="n">Resource</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">u</span><span class="p">:</span> <span class="n">User</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">Action</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="n">Resource</span> <span class="o">|</span>
+  <span class="cm">/* &#39;u&#39; can perform &#39;a&#39; on &#39;r&#39; only if allowed by &#39;acl&#39; */</span>
+  <span class="n">u</span><span class="o">-&gt;</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">r</span> <span class="ow">in</span> <span class="n">performs</span> <span class="o">=&gt;</span> <span class="o">(</span><span class="k">some</span> <span class="n">ro</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">roles</span> <span class="o">|</span> <span class="n">ro</span><span class="o">-&gt;</span><span class="n">a</span><span class="o">-&gt;</span><span class="n">r</span> <span class="ow">in</span> <span class="n">acl</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="cm">/* Assumption: no user can both be a faculty and a student/TA */</span>
+<span class="k">pred</span> <span class="nf">noDualRoles</span><span class="o">[</span><span class="n">roles</span> <span class="p">:</span> <span class="n">User</span><span class="o">-&gt;</span><span class="n">Role</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">no</span> <span class="n">u</span><span class="p">:</span> <span class="n">User</span> <span class="o">|</span> <span class="n">Faculty</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">roles</span> <span class="ow">and</span> <span class="k">some</span> <span class="o">(</span><span class="n">Student</span> <span class="o">+</span> <span class="n">TA</span><span class="o">)</span> <span class="o">&amp;</span> <span class="n">u</span><span class="o">.</span><span class="n">roles</span>
+<span class="o">}</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Synthesis predicates</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+
+<span class="cm">/* &#39;acl&#39; satisfies properties over every user role and behavior */</span>
+<span class="k">pred</span> <span class="nf">valid</span><span class="o">[</span><span class="n">acl</span><span class="p">:</span> <span class="n">Role</span><span class="o">-&gt;</span><span class="n">Action</span><span class="o">-&gt;</span><span class="n">Resource</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">roles</span><span class="p">:</span> <span class="n">User</span><span class="o">-&gt;</span><span class="n">Role</span><span class="p">,</span> <span class="n">performs</span> <span class="p">:</span> <span class="n">User</span><span class="o">-&gt;</span><span class="n">Action</span><span class="o">-&gt;</span><span class="n">Resource</span> <span class="o">|</span>
+    <span class="o">(</span><span class="n">enforce</span><span class="o">[</span><span class="n">acl</span><span class="p">,</span> <span class="n">roles</span><span class="p">,</span> <span class="n">performs</span><span class="o">]</span> <span class="ow">and</span> <span class="n">noDualRoles</span><span class="o">[</span><span class="n">roles</span><span class="o">])</span> <span class="ow">implies</span>
+      <span class="o">(</span><span class="n">prop1</span><span class="o">[</span><span class="n">roles</span><span class="p">,</span> <span class="n">performs</span><span class="o">]</span> <span class="ow">and</span> <span class="n">prop2</span><span class="o">[</span><span class="n">roles</span><span class="p">,</span> <span class="n">performs</span><span class="o">])</span>
+<span class="o">}</span>
+
+<span class="cm">/* &#39;acl&#39; allows the most number of actions while being valid */</span>
+<span class="k">pred</span> <span class="nf">mostPermissive</span><span class="o">[</span><span class="n">acl</span><span class="p">:</span> <span class="n">Role</span><span class="o">-&gt;</span><span class="n">Action</span><span class="o">-&gt;</span><span class="n">Resource</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">valid</span><span class="o">[</span><span class="n">acl</span><span class="o">]</span>
+  <span class="k">no</span> <span class="n">acl&#39;</span><span class="p">:</span> <span class="n">Role</span><span class="o">-&gt;</span><span class="n">Action</span><span class="o">-&gt;</span><span class="n">Resource</span> <span class="o">|</span>
+    <span class="n">acl</span> <span class="o">!=</span> <span class="n">acl&#39;</span> <span class="ow">and</span> <span class="n">valid</span><span class="o">[</span><span class="n">acl&#39;</span><span class="o">]</span> <span class="ow">and</span> <span class="o">#</span><span class="n">acl&#39;</span> <span class="o">&gt;</span> <span class="o">#</span><span class="n">acl</span>
+<span class="o">}</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Commands</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+
+<span class="k">run</span> <span class="n">valid</span> <span class="k">for</span> <span class="mi">4</span> <span class="k">but</span> <span class="mi">6</span> <span class="kt">Int</span>		<span class="c1">-- synthesize a valid policy</span>
+<span class="k">run</span> <span class="n">mostPermissive</span> <span class="k">for</span> <span class="mi">4</span> <span class="k">but</span> <span class="mi">6</span> <span class="kt">Int</span>	<span class="c1">-- synthesize the most permissive valid policy</span>
+</pre></div>
+</body></html>

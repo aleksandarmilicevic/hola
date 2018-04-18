@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Alloy*&mdash;A General-Purpose, Higher-Order, Relational Constraint Solver</title>
+<!-- <link rel="stylesheet" type="text/css" href="../css/reset.css"/> -->
+<!-- <link rel="stylesheet" media="screen" href="../css/grid960.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="../css/type.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="../css/helpers.css" /> -->
+<!-- <link rel="stylesheet" type="text/css" href="../css/custom2.css"/> -->
+
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="css/custom.css"/>
+  <link rel="stylesheet" type="text/css" href="css/alloy.css"/>
+
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+  <script src="model-links.js"></script>
+</head>
+
+<body data-spy="scroll" data-target=".my-sidebar">
+
+<div class="_affix" id="_title">
+</div>
+
+<div id="container" class="container">
+
+<div class="row">
+
+<div class="my-sidebar affix">
+  <img id="logo" width="80%" src="hola_logo.png"/>
+
+  <ul class="nav bs-docs-sidenav">
+    <li class=""><a href="#h2-about">about</a></li>
+    <li class=""><a href="#h2-download">download & run</a></li>
+    <li class=""><a href="#h2-sample">sample models</a></li>
+    <li class=""><a href="#h2-examples">examples</a>
+      <ul class="nav">
+        <li><a href="#h3-turan">turan's theorem</a></li>
+        <li><a href="#h3-synth">program synthesis</a></li>
+      </ul>
+    </li>
+    <li class=""><a href="#h2-opts">options</a></li>
+  </ul>
+  <!-- <a class="back-to-top" href="#top"> -->
+  <!--   back to top -->
+  <!-- </a> -->
+</div>
+
+<div class="col-xs-12" id="main">
+
+<h1 class="title text-center"><b>Alloy*</b>: A Higher-Order Relational Constraint Solver</h1>
+
+<h2 id="h2-about">about <b>alloy*</b></h2>
+<!-- <dl class="dl-horizontal"> -->
+<!--   <dt>what</dt> -->
+<!--   <dd>general-purpose, higher-order, bounded constraint solver</dd> -->
+
+<!--   <dt>language</dt> -->
+<!--   <dd>retains the syntax of alloy: predicate logic + relational algebra</dd> -->
+
+<!--   <dt>analysis</dt> -->
+<!--   <dd>the alloy analyzer + CEGIS: changes the semantics of Alloy only -->
+<!-- by expanding the set of specifications that can be analyzed</dd> -->
+
+<!-- </dl> -->
+
+<div class="_well _well-sm">
+<ul>
+  <!-- <li>general-purpose, <span class="hgl">higher-order</span>, bounded <span class="hgl">constraint solver</span></li> -->
+  <li><span class="main">retains the <span class="hgl">syntax of Alloy</span>:</span><span class="desc"> predicate logic + relational algebra</span></li>
+  <li><span class="main">permits <span class="hgl">higher-order
+      quantification</span></span>:<span class="desc"> changes the
+      semantics of Alloy only by expanding the set of specifications
+      that can be analyzed</span></li>
+  <li><span class="main">implements <span class="hgl">CEGIS</span> on
+      top of Kodkod</span>:<span class="desc"> all higher-order
+      quantifiers are analyzable (regardless of their position in the
+      formula)</span></li>
+  <li><span class="main"><span class="hgl">applications</span>:
+      synthesis, game theory, minimization/maximization,
+      ...</span></li>
+</ul>
+</div>
+
+<div class="row">
+<div class="col-xs-6">
+<h2 id="h2-download">download & run</h2>
+<dl class="dl-horizontal">
+  <dt>download</dt><dd><a href="downloads/hola-0.1.jar">hola-0.1.jar</a> (sources included)</dd>
+  <dt>license</dt><dd><a href="http://www.gnu.org/licenses/gpl-3.0.txt">GPLv3</a></dd>
+  <dt>requirements</dt><dd>Java 1.6</dd>
+</dl>
+<pre>
+  wget http://alloy.mit.edu/alloy/hola/downloads/hola-0.1.jar
+  java -jar hola-0.1.jar
+</pre>
+</div>
+</div>
+
+<h2 id="h2-sample">sample models</h2>
+<div class="row">
+<div class="col-xs-6">
+
+<dl class="dl-horizontal">
+  <dt>sygus</dt><dd>syntax guided program synthesis <a href="https://github.com/rishabhs/sygus-comp14/tree/master/benchmarks/integer-benchmarks">benchmarks</a></dd>
+  <dt>margrave</dt><dd><a href="http://web.cs.wpi.edu/~kfisler/Research/Margrave/index.html">Margrave</a>
+  policy synthesizer</dd>
+  <dt>graph</dt><dd>various graph algorithms</dd>
+</dl>
+<pre>
+  select menu: <kbd>File</kbd> -> <kbd>Open Sample Models</kbd>
+  choose path: "models/hol"
+</pre>
+</div>
+<div class="col-xs-3">
+<img id="models-graph-margrave" src="models-1.png" class="img-thumbnail"/>
+</div>
+<div class="col-xs-3">
+<img id="models-synth" src="models-2.png" class="img-thumbnail"/>
+</div>
+<!-- <div class="col-xs-6"> -->
+<!-- <pre> -->
+<!-- models/hol/ -->
+<!-- |-- graph -->
+<!-- |   |-- graph.als -->
+<!-- |   |-- micro_benchmarks.als -->
+<!-- |   `-- turan.als -->
+<!-- |-- margrave -->
+<!-- |   `-- gradePolicy.als -->
+<!-- `-- sygus -->
+<!--     |-- array_search_2.als -->
+<!--     |-- array_search_3.als -->
+<!--     |-- array_search_4.als -->
+<!--     |-- array_search_5.als -->
+<!--     |-- array_search.als -->
+<!--     |-- max-3.als -->
+<!--     |-- max-4.als -->
+<!--     |-- max-5.als -->
+<!--     |-- max-6.als -->
+<!--     |-- max-7.als -->
+<!--     |-- max-8.als -->
+<!--     |-- max.als -->
+<!--     `-- synth.als -->
+<!-- </pre> -->
+<!-- </div> -->
+</div>
+
+<h2 id="h2-examples">examples</h2>
+
+<h3 id="h3-turan">Turan's graph theorem</h3>
+<div class="row">
+<div class="col-xs-6">
+<p class="text-justify">
+The formulation of Turan's theorem states that a
+<code>k+1</code>-free graph with <code>n</code> nodes can maximally
+have <code>(k-1)n<sup>2</sup>/(2k)</code> edges.  A graph
+is <code>k+1</code>-free if it contains no clique
+with <code>k+1</code> nodes (a clique is a subset of nodes in which
+every two nodes are connected by an edge); this is equivalent to
+saying that its maximum clique has exactly <code>k</code> nodes.  A
+formalization of Turan's theorem in Alloy is given in the figure on
+the right.</p>
+
+<p class="text-justify">
+The formalization of the <code>maxClique</code> property is
+<strong>higher-order</strong>, because it quantifies over all possible
+sets of <code>Node</code>s to assert that there does not exist another
+set of nodes which is a <code>clique</code> and has more nodes than
+the max-clique.  Higher-order specifications are expressible in Alloy,
+but the official Alloy Analyzer is not powerful enough to analyze
+them.  In <strong>Alloy*</strong>, in contrast, this check can be
+automatically performed to confirm that no counterexample can be found
+within the specified scope.</p>
+
+<p class="text-justify">
+There are two ways to now formalize Turan's theorem
+(the <code>Turan_dom_constr</code> and <code>Turan_classical</code>
+commands).  In both cases, the idea is to asserts that for all
+possible <code>edge</code> relations (from <code>Node</code>
+to <code>Node</code>) that are symmetric and irreflexive, if the
+max-clique in that graph has <code>k</code> nodes
+(<code>k=#mClq</code>), the number of selected edges
+(<code>e=(#edges).div[2]</code>) must be at
+most <code>(k-1)n<sup>2</sup>/(2k)</code> (the number of tuples in
+<code>edges</code> is divided by <code>2</code> because the graph in
+setup of the theorem in undirected).  The differences, although
+syntactic, have significant impact on performance:
+</p>
+
+<dl class="dl-horizontal dom-cls">
+<dt>classical</dt>
+<dd class="text-justify">the classical way to constrain the domain of
+a universal quantifier (e.g., <em>all edges that are symmetric and
+irreflexive</em>) is to use an implication in the quantifier body;
+similarly, to constraint the domain of an existential quantifier
+(e.g., <em>some set of nodes that is max-clique</em>), a conjunction
+in the body is used.</dd>
+
+<dt>with domain<br>constraints</dt><dd class="text-justify">for an efficient CEGIS
+implementation, we prefer domain constraints to be given explicitly
+(as opposed to merged and inlined in the quantifier body) using the
+newly introduced <code><strong>when</strong></code> clause (not
+available in standard Alloy).</dd>
+</dl>
+
+<table class="table-turan table table-bordered table-condensed">
+<thead>
+<tr><td><sub>command</sub>\<sup>scope</sup></td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+</thead>
+<tbody>
+<tr><td><code>Turan_classical</code></td>
+    <td>4s</td>
+    <td>10s</td>
+    <td>43s</td>
+    <td>to</td>
+    <td>to</td>
+    <td>to</td></tr>
+<tr><td><code>Turan_dom_constr</code></td>
+    <td>0.3s</td>
+    <td>3s</td>
+    <td>6s</td>
+    <td>10s</td>
+    <td>44s</td>
+    <td>170s</td></tr>
+<tr><td class="table-caption" colspan="7">comparison of analysis times for various scopes</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="col-xs-6">
+<pre><span class="k">some</span> <span class="kd">sig</span> <span class="nc">Node</span>  <span class="o">{}</span>
+
+<span class="c1">// between every two nodes there is an edge</span>
+<span class="k">pred</span> <span class="nf">clique</span><span class="o">[</span><span class="n">edges</span><span class="p">:</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">,</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="k">disj</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="n">clq</span> <span class="o">|</span> <span class="n">n1</span> <span class="o">-&gt;</span> <span class="n">n2</span> <span class="ow">in</span> <span class="n">edges</span>
+<span class="o">}</span>
+
+<span class="c1">// no other clique with more nodes</span>
+<span class="k">pred</span> <span class="nf">maxClique</span><span class="o">[</span><span class="n">edges</span><span class="p">:</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">,</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">clique</span><span class="o">[</span><span class="n">edges</span><span class="p">,</span> <span class="n">clq</span><span class="o">]</span>
+  <span class="k">no</span> <span class="n">cq2</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">|</span> <span class="n">cq2</span><span class="o">!=</span><span class="n">clq</span> <span class="o">&amp;&amp;</span> <span class="n">clique</span><span class="o">[</span><span class="n">edges</span><span class="p">,</span><span class="n">cq2</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">#</span><span class="n">cq2</span><span class="o">&gt;#</span><span class="n">clq</span>
+<span class="o">}</span>
+
+<span class="c1">// symmetric and irreflexive</span>
+<span class="k">pred</span> <span class="nf">edgeProps</span><span class="o">[</span><span class="n">edges</span><span class="p">:</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
+  <span class="o">(~</span><span class="n">edges</span> <span class="ow">in</span> <span class="n">edges</span><span class="o">)</span> <span class="ow">and</span> <span class="o">(</span><span class="k">no</span> <span class="n">edges</span> <span class="o">&amp;</span> <span class="kc">iden</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="c1">// max number of edges in a (k+1)-free graph with n </span>
+<span class="c1">// nodes is (k-1)n^2/(2k)</span>
+<span class="k">check</span> <span class="n">Turan_dom_constr</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">edges</span><span class="p">:</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="n">Node</span> <span class="k">when</span> <span class="n">edgeProps</span><span class="o">[</span><span class="n">edges</span><span class="o">]</span> <span class="o">|</span>
+    <span class="k">some</span> <span class="n">mClq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="k">when</span> <span class="n">maxClique</span><span class="o">[</span><span class="n">edges</span><span class="p">,</span> <span class="n">mClq</span><span class="o">]</span> <span class="o">|</span>
+      <span class="k">let</span> <span class="n">n</span> <span class="o">=</span> <span class="o">#</span><span class="n">Node</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="o">#</span><span class="n">mClq</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="o">(#</span><span class="n">edges</span><span class="o">).</span><span class="n">div</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">|</span>
+        <span class="n">e</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="o">.</span><span class="n">minus</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="n">mul</span><span class="o">[</span><span class="n">n</span><span class="o">].</span><span class="n">mul</span><span class="o">[</span><span class="n">n</span><span class="o">].</span><span class="n">div</span><span class="o">[</span><span class="mi">2</span><span class="o">].</span><span class="n">div</span><span class="o">[</span><span class="n">k</span><span class="o">]</span>
+<span class="o">}</span><span class="k">for</span> <span class="mi">7</span> <span class="k">but</span> <span class="mi">0</span><span class="o">..</span><span class="mi">294</span> <span class="kt">Int</span> <span class="c1">-- checks in ~6s</span>
+
+<span class="c1">// same as above, but with inlined domain constraints</span>
+<span class="k">check</span> <span class="n">Turan_classical</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">edges</span><span class="p">:</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="n">Node</span> <span class="o">|</span> <span class="n">edgeProps</span><span class="o">[</span><span class="n">edges</span><span class="o">]</span> <span class="ow">implies</span> <span class="o">{</span>
+    <span class="k">some</span> <span class="n">mClq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
+      <span class="n">maxClique</span><span class="o">[</span><span class="n">edges</span><span class="p">,</span> <span class="n">mClq</span><span class="o">]</span>
+      <span class="k">let</span> <span class="n">n</span> <span class="o">=</span> <span class="o">#</span><span class="n">Node</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="o">#</span><span class="n">mClq</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="o">(#</span><span class="n">edges</span><span class="o">).</span><span class="n">div</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">|</span>
+        <span class="n">e</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="o">.</span><span class="n">minus</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="n">mul</span><span class="o">[</span><span class="n">n</span><span class="o">].</span><span class="n">mul</span><span class="o">[</span><span class="n">n</span><span class="o">].</span><span class="n">div</span><span class="o">[</span><span class="mi">2</span><span class="o">].</span><span class="n">div</span><span class="o">[</span><span class="n">k</span><span class="o">]</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span> <span class="k">for</span> <span class="mi">7</span> <span class="k">but</span> <span class="mi">0</span><span class="o">..</span><span class="mi">294</span> <span class="kt">Int</span> <span class="c1">-- checks in ~43s</span>
+</pre>
+</div>
+</div>
+
+<h3 id="h3-synth">program synthesis</h3>
+
+<div class="row">
+<div class="col-xs-5">
+  <h4>program ast</h4>
+  <pre><span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">Bool</span> <span class="o">{}</span>
+<span class="k">one</span> <span class="kd">sig</span> <span class="nc">BoolTrue</span> <span class="k">extends</span> <span class="n">Bool</span> <span class="o">{}</span>
+<span class="k">one</span> <span class="kd">sig</span> <span class="nc">BoolFalse</span> <span class="k">extends</span> <span class="n">Bool</span> <span class="o">{}</span>
+
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">Node</span> <span class="o">{}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">BoolNode</span> <span class="k">extends</span> <span class="n">Node</span> <span class="o">{}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">IntNode</span>  <span class="k">extends</span> <span class="n">Node</span> <span class="o">{}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">Var</span>      <span class="k">extends</span> <span class="n">IntNode</span> <span class="o">{}</span>
+
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">IntLit</span>   <span class="k">extends</span> <span class="n">IntNode</span> <span class="o">{</span> <span class="n">val</span><span class="p">:</span> <span class="k">one</span> <span class="kt">Int</span> <span class="o">}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">IntComp</span>  <span class="k">extends</span> <span class="n">BoolNode</span> <span class="o">{</span>
+  <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">IntNode</span>
+<span class="o">}</span>
+<span class="k">abstract</span> <span class="kd">sig</span> <span class="nc">BoolComp</span> <span class="k">extends</span> <span class="n">BoolNode</span> <span class="o">{</span>
+  <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">BoolNode</span>
+<span class="o">}</span>
+
+<span class="kd">sig</span> <span class="nc">EQ</span><span class="p">,</span> <span class="nc">GTE</span><span class="p">,</span> <span class="nc">LTE</span><span class="p">,</span> <span class="nc">GT</span><span class="p">,</span> <span class="nc">LT</span> <span class="k">extends</span> <span class="n">IntComp</span> <span class="o">{}</span>
+<span class="kd">sig</span> <span class="nc">And</span><span class="p">,</span> <span class="nc">Or</span> <span class="k">extends</span> <span class="n">BoolComp</span> <span class="o">{}</span>
+<span class="kd">sig</span> <span class="nc">Not</span>     <span class="k">extends</span> <span class="n">BoolNode</span> <span class="o">{</span> <span class="n">arg</span><span class="p">:</span> <span class="n">BoolNode</span> <span class="o">}</span>
+<span class="kd">sig</span> <span class="nc">ITE</span>     <span class="k">extends</span> <span class="n">IntNode</span> <span class="o">{</span>
+  <span class="n">condition</span><span class="p">:</span> <span class="n">BoolNode</span><span class="p">,</span> <span class="n">then</span><span class="p">,</span> <span class="n">elsen</span><span class="p">:</span> <span class="n">IntNode</span>
+<span class="o">}</span></pre>
+
+<h4>invariants</h4>
+<pre><span class="k">pred</span> <span class="nf">acyclic</span><span class="o">[</span><span class="n">r</span><span class="p">:</span> <span class="kc">univ</span><span class="o">-&gt;</span><span class="kc">univ</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="k">set</span> <span class="kc">univ</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">x</span><span class="p">:</span> <span class="n">s</span> <span class="o">|</span> <span class="n">x</span> <span class="o">!</span><span class="ow">in</span> <span class="n">x</span><span class="o">.^</span><span class="n">r</span>
+<span class="o">}</span>
+<span class="k">fact</span> <span class="o">{</span>
+  <span class="n">acyclic</span><span class="o">[</span><span class="n">arg</span> <span class="o">+</span> <span class="n">condition</span> <span class="o">+</span> <span class="n">then</span> <span class="o">+</span> <span class="n">elsen</span> <span class="o">+</span>
+          <span class="n">IntComp</span><span class="o">&lt;</span><span class="p">:</span><span class="n">left</span>   <span class="o">+</span> <span class="n">IntComp</span><span class="o">&lt;</span><span class="p">:</span><span class="n">right</span> <span class="o">+</span>
+          <span class="n">BoolComp</span><span class="o">&lt;</span><span class="p">:</span><span class="n">left</span>  <span class="o">+</span> <span class="n">BoolComp</span><span class="o">&lt;</span><span class="p">:</span><span class="n">right</span><span class="p">,</span> <span class="n">Node</span><span class="o">]</span>
+<span class="o">}</span></pre>
+</div>
+
+
+<div class="col-xs-7">
+  <h4>semantics</h4>
+<pre><span class="k">pred</span> <span class="nf">semantics</span><span class="o">[</span><span class="n">eval</span><span class="p">:</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="kt">Int</span> <span class="o">+</span> <span class="n">Bool</span><span class="o">)]</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">ITE</span> <span class="o">{</span>
+    <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span>
+    <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">condition</span><span class="o">]</span> <span class="ow">in</span> <span class="n">Bool</span> <span class="o">&amp;&amp;</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">then</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span> <span class="o">&amp;&amp;</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">elsen</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span>
+    <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">condition</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="ow">implies</span>
+      <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">then</span><span class="o">]</span> <span class="o">=</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">elsen</span><span class="o">]</span> <span class="o">=</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span>
+  <span class="o">}</span>
+
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">BoolNode</span> <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="ow">in</span> <span class="n">Bool</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">IntComp</span>  <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">BoolComp</span> <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="ow">in</span> <span class="n">Bool</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">in</span> <span class="n">Bool</span>
+  <span class="k">all</span> <span class="n">v</span><span class="p">:</span> <span class="n">Var</span>      <span class="o">|</span> <span class="k">one</span> <span class="n">eval</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span>
+  <span class="k">all</span> <span class="n">i</span><span class="p">:</span> <span class="n">IntLit</span>   <span class="o">|</span> <span class="k">one</span> <span class="n">eval</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="ow">in</span> <span class="kt">Int</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">val</span>
+
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">Not</span>  <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">arg</span><span class="o">]</span> <span class="ow">in</span> <span class="n">Bool</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">EQ</span>   <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">implies</span>
+                  <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">GTE</span>  <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">implies</span>
+                  <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">LTE</span>  <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">implies</span>
+                  <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">GT</span>   <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">implies</span>
+                  <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">LT</span>   <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="ow">implies</span>
+                  <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">And</span>  <span class="o">|</span> <span class="o">(</span><span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="ow">and</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span><span class="o">)</span> <span class="ow">implies</span>
+                 <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">Or</span>   <span class="o">|</span> <span class="o">(</span><span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">left</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="ow">or</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">right</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span><span class="o">)</span> <span class="ow">implies</span>
+                 <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+  <span class="k">all</span> <span class="n">n</span><span class="p">:</span> <span class="n">Not</span>  <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">.</span><span class="n">arg</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span> <span class="ow">implies</span>
+                 <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolTrue</span> <span class="k">else</span> <span class="n">eval</span><span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">BoolFalse</span>
+<span class="o">}</span></pre>
+</div>
+</div>
+
+<div class="row">
+<div class="col-xs-8">
+<h4>specification for max-4</h4>
+<pre><span class="k">one</span> <span class="kd">sig</span> <span class="nc">X</span><span class="p">,</span> <span class="nc">Y</span><span class="p">,</span> <span class="nc">Z</span><span class="p">,</span> <span class="nc">U</span> <span class="k">extends</span> <span class="n">Var</span> <span class="o">{}</span>
+
+<span class="k">pred</span> <span class="nf">spec</span><span class="o">[</span><span class="n">root</span><span class="p">:</span> <span class="n">Node</span><span class="p">,</span> <span class="n">eval</span><span class="p">:</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="kt">Int</span> <span class="o">+</span> <span class="n">Bool</span><span class="o">)]</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">v</span><span class="p">:</span> <span class="n">Var</span> <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">root</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">eval</span><span class="o">[</span><span class="n">v</span><span class="o">]</span>
+  <span class="k">some</span> <span class="n">v</span><span class="p">:</span> <span class="n">Var</span> <span class="o">|</span> <span class="n">eval</span><span class="o">[</span><span class="n">root</span><span class="o">]</span> <span class="o">=</span> <span class="n">eval</span><span class="o">[</span><span class="n">v</span><span class="o">]</span>
+<span class="o">}</span></pre>
+
+<h4>generic synthesis predicate</h4>
+<pre><span class="k">pred</span> <span class="nf">synth</span><span class="o">[</span><span class="n">root</span><span class="p">:</span> <span class="n">IntNode</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">env</span><span class="p">:</span> <span class="n">Var</span> <span class="o">-&gt;</span> <span class="k">one</span> <span class="kt">Int</span> <span class="o">|</span>
+    <span class="k">some</span> <span class="n">eval</span><span class="p">:</span> <span class="n">Node</span> <span class="o">-&gt;</span> <span class="k">one</span> <span class="o">(</span><span class="kt">Int</span><span class="o">+</span><span class="n">Bool</span><span class="o">)</span> <span class="k">when</span> <span class="n">env</span> <span class="ow">in</span> <span class="n">eval</span> <span class="o">&amp;&amp;</span> <span class="n">semantics</span><span class="o">[</span><span class="n">eval</span><span class="o">]</span> <span class="o">|</span>
+      <span class="n">spec</span><span class="o">[</span><span class="n">root</span><span class="p">,</span> <span class="n">eval</span><span class="o">]</span>
+<span class="o">}</span></pre>
+
+<h4>solving the synth predicate</h4>
+<pre><span class="k">run</span> <span class="n">synth</span> <span class="k">for</span> <span class="mi">10</span> <span class="k">but</span> <span class="mi">0</span><span class="o">..</span><span class="mi">3</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">3</span> <span class="n">ITE</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">3</span> <span class="n">GTE</span></pre>
+
+<div class="row text-center"><img src="models/max4-trace.png" class="img-thumbnail"/></div>
+</div>
+
+<div class="col-xs-4">
+<h4>generated program</h4>
+  <div class="row text-center">
+    <img style="height='100px';" src="models/max4-inst.png" class="img-thumbnail"/>
+  </div>
+</div>
+</div>
+
+<h2 id="h2-opts">higher-order analysis options</h2>
+<table class="opts table table-striped">
+<thead>
+  <tr>
+    <td>name</td>
+    <td>type</td>
+    <td>default</td>
+    <td>description</td>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Solver</td>
+    <td>MiniSat/SAT4J/...</td>
+    <td>SAT4J</td>
+    <td>SAT solver to use.  Selected solver <strong>must support
+    incremental solving</strong> if higher-order solving is used,
+    i.e., must be one of: MiniSat, SAT4J, Glucose, CriptoMiniSat.</td>
+  </tr>
+  <tr>
+    <td>Use higher-order solver</td>
+    <td>yes/no</td>
+    <td>no</td>
+    <td>Enable/disable higher-order solver.</td>
+  </tr>
+  <tr>
+    <td>Create relations for atoms</td>
+    <td>yes/no</td>
+    <td>yes</td>
+    <td>Whether to create a Kodkod relation for each atom;
+        <br><strong>must be set to "yes" when higher-order solving is
+        used</strong>.</td>
+  </tr>
+  <tr>
+    <td>Force incremental CEGIS induction</td>
+    <td>yes/no</td>
+    <td>yes</td>
+    <td>Whether to force incremental solving even when the induction
+    increment formula is not first-order (by using a first-order
+    approximation instead); "yes" typically results in better
+    performance.</td>
+  </tr>
+  <tr>
+    <td>Maximum number of CEGIS iterations</td>
+    <td>int</td>
+    <td>100</td>
+    <td>Maximum number of iterations per each CEGIS loop.</td>
+  </tr>
+  <tr>
+    <td>Save CEGIS candidates as</td>
+    <td>Viz/Text/Nothing</td>
+    <td>Viz</td>
+    <td>Whether to save intermediate candidate solutions and how:
+      <dl class="dl-horizontal">
+        <dt>Viz</dt><dd>as Alloy XML instance (can be visualized later on)</dd>
+        <dt>Text</dt><dd>as plain text (human readable, but cannot be visualized)</dd>
+        <dt>Nothing</dt><dd>not saved.</dd>
+      </dl>
+    </td>
+  </tr>
+  <tr>
+    <td>Save CEGIS counterexamples as</td>
+    <td>Viz/Text/Nothing</td>
+    <td>Viz</td>
+    <td>Whether to save intermediate counterexamples and how (same as above).</td>
+  </tr>
+  <tr>
+    <td>Save CEGIS formulas</td>
+    <td>yes/no</td>
+    <td>yes</td>
+    <td>Whether to save intermediate formulas (saved as plain text).</td>
+  </tr>
+  <tr>
+    <td>Save CEGIS partial instances</td>
+    <td>yes/no</td>
+    <td>yes</td>
+    <td>Whether to save intermediate partial instances (saved as plain text).</td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+
+<br><br><br><br>
+<hr>
+Copyright &copy; 2014 <a href="http://sdg.csail.mit.edu">Software Design Group</a>
+
+
+</div>
+</body>
+</html>
+

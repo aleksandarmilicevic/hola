@@ -1,0 +1,141 @@
+<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="http://alloy.mit.edu/alloy/hola/css/alloy.css"/></head><body>
+<div class="highlight"><pre><span class="kn">module</span> <span class="nn">graph</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Sigs</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="kd">sig</span> <span class="nc">Node</span>  <span class="o">{</span>
+  <span class="n">val</span><span class="p">:</span> <span class="k">lone</span> <span class="kt">Int</span>
+<span class="o">}</span>
+
+<span class="kd">sig</span> <span class="nc">Edge</span>  <span class="o">{</span>
+  <span class="n">src</span><span class="p">:</span> <span class="k">one</span> <span class="n">Node</span><span class="p">,</span>
+  <span class="n">dst</span><span class="p">:</span> <span class="k">one</span> <span class="n">Node</span>
+<span class="o">}</span> <span class="o">{</span>
+  <span class="n">src</span> <span class="o">!=</span> <span class="n">dst</span>
+<span class="o">}</span>
+
+<span class="kd">sig</span> <span class="nc">Graph</span>  <span class="o">{</span>
+  <span class="n">nodes</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span><span class="p">,</span>
+  <span class="n">edges</span><span class="p">:</span> <span class="k">set</span> <span class="n">Edge</span>
+<span class="o">}</span> <span class="o">{</span>
+  <span class="n">edges</span><span class="o">.(</span><span class="n">src</span> <span class="o">+</span> <span class="n">dst</span><span class="o">)</span> <span class="ow">in</span> <span class="n">nodes</span>
+<span class="o">}</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Functions/Predicates/Assertions</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+
+<span class="cm">/* sum of node values */</span>
+<span class="k">fun</span> <span class="nf">valsum</span><span class="o">[</span><span class="n">nodes</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span><span class="o">]</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">{</span>
+  <span class="k">sum</span> <span class="n">n</span><span class="p">:</span> <span class="n">nodes</span> <span class="o">|</span> <span class="n">n</span><span class="o">.</span><span class="n">val</span>
+<span class="o">}</span>
+
+<span class="cm">/* every two nodes in &#39;clq&#39; are connected */</span>
+<span class="k">pred</span> <span class="nf">clique</span><span class="o">[</span><span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">clq</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span>
+  <span class="k">all</span> <span class="k">disj</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">:</span> <span class="n">clq</span> <span class="o">|</span>
+    <span class="k">some</span> <span class="n">e</span><span class="p">:</span> <span class="n">g</span><span class="o">.</span><span class="n">edges</span> <span class="o">|</span>
+      <span class="o">(</span><span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span><span class="o">)</span> <span class="o">=</span> <span class="n">e</span><span class="o">.(</span><span class="n">src</span> <span class="o">+</span> <span class="n">dst</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="cm">/* &#39;clq&#39; is clique and there is no other clique with more nodes */</span>
+<span class="k">pred</span> <span class="nf">maxClique</span><span class="o">[</span><span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">clique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">clq</span><span class="o">]</span>
+  <span class="k">no</span> <span class="n">clq2</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
+    <span class="n">clq2</span> <span class="o">!=</span> <span class="n">clq</span>
+    <span class="n">clique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">clq2</span><span class="o">]</span>
+    <span class="o">#</span><span class="n">clq2</span> <span class="o">&gt;</span> <span class="o">#</span><span class="n">clq</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="cm">/* &#39;clq&#39; is maxClique and there is no other maxClique with greater sum */</span>
+<span class="k">pred</span> <span class="nf">maxMaxClique</span><span class="o">[</span><span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span><span class="o">]</span> <span class="o">{</span>
+  <span class="n">maxClique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">clq</span><span class="o">]</span>
+  <span class="k">no</span> <span class="n">clq2</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
+    <span class="n">clq2</span> <span class="o">!=</span> <span class="n">clq</span>
+    <span class="n">maxClique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">clq</span><span class="o">]</span>
+    <span class="n">valsum</span><span class="o">[</span><span class="n">clq2</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">valsum</span><span class="o">[</span><span class="n">clq</span><span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="cm">/* graph &#39;g&#39; has no clique of size &#39;n&#39; */</span>
+<span class="k">pred</span> <span class="nf">noClique</span><span class="o">[</span><span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="kt">Int</span><span class="o">]</span> <span class="o">{</span>
+  <span class="k">no</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
+    <span class="o">#</span><span class="n">clq</span> <span class="o">=</span> <span class="n">n</span>
+    <span class="n">clique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">clq</span><span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="o">/*</span> <span class="n">assertion</span><span class="p">:</span> <span class="n">if</span> <span class="n">a</span> <span class="n">graph</span> <span class="n">has</span> <span class="k">exactly</span> <span class="mi">2</span> <span class="n">nodes</span> <span class="ow">and</span> <span class="k">some</span> <span class="n">edges</span><span class="p">,</span>
+   <span class="n">it&#39;s</span> <span class="n">max</span><span class="o">-</span><span class="n">clique</span> <span class="n">must</span> <span class="n">contain</span> <span class="n">both</span> <span class="n">nodes</span> <span class="o">*/</span>
+<span class="k">assert</span> <span class="nf">maxClique_props</span> <span class="o">{</span>
+  <span class="k">all</span> <span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
+    <span class="o">#</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="k">some</span> <span class="n">g</span><span class="o">.</span><span class="n">edges</span> <span class="o">&amp;&amp;</span> <span class="n">maxClique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">clq</span><span class="o">]</span> <span class="o">=&gt;</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">clq</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="c1">--------------------------------------------------------------------------------</span>
+<span class="c1">-- Commands</span>
+<span class="c1">--------------------------------------------------------------------------------</span>
+
+<span class="k">run</span> <span class="n">noClique</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">5</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">1</span> <span class="n">Graph</span><span class="p">,</span> <span class="mi">5</span> <span class="n">Node</span><span class="p">,</span> <span class="mi">10</span> <span class="n">Edge</span> <span class="n">expect</span> <span class="mi">1</span>
+<span class="k">run</span> <span class="n">maxClique</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">5</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">1</span> <span class="n">Graph</span><span class="p">,</span> <span class="mi">5</span> <span class="n">Node</span><span class="p">,</span> <span class="mi">10</span> <span class="n">Edge</span> <span class="n">expect</span> <span class="mi">1</span>
+<span class="k">run</span> <span class="n">maxMaxClique</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">5</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">1</span> <span class="n">Graph</span><span class="p">,</span> <span class="mi">5</span> <span class="n">Node</span><span class="p">,</span> <span class="mi">10</span> <span class="n">Edge</span> <span class="n">expect</span> <span class="mi">1</span>
+
+<span class="cm">/* find a graph that has no clique of size 1 =&gt; SAT */</span>
+<span class="k">run</span> <span class="n">noClique_sat1</span> <span class="o">{</span>
+  <span class="k">some</span> <span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">{</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">noClique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">n</span><span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">5</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">1</span> <span class="n">Graph</span><span class="p">,</span> <span class="mi">5</span> <span class="n">Node</span><span class="p">,</span> <span class="mi">10</span> <span class="n">Edge</span> <span class="n">expect</span> <span class="mi">1</span>
+
+<span class="cm">/* find a graph that has some nodes and no clique of size 1 =&gt; UNSAT */</span>
+<span class="k">run</span> <span class="n">noClique_unsat</span> <span class="o">{</span>
+  <span class="k">some</span> <span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="kt">Int</span> <span class="o">{</span>
+	<span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">some</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span>
+    <span class="n">noClique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">n</span><span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">5</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">1</span> <span class="n">Graph</span><span class="p">,</span> <span class="mi">5</span> <span class="n">Node</span><span class="p">,</span> <span class="mi">10</span> <span class="n">Edge</span> <span class="n">expect</span> <span class="mi">0</span>
+
+<span class="cm">/* find a graph with 5 nodes and a max-clique of size 2 =&gt; SAT */</span>
+<span class="k">run</span> <span class="n">maxClique_sat</span> <span class="o">{</span>
+  <span class="k">some</span> <span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
+    <span class="o">#</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="o">#</span><span class="n">clq</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">maxClique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">clq</span><span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">5</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">1</span> <span class="n">Graph</span><span class="p">,</span> <span class="mi">5</span> <span class="n">Node</span><span class="p">,</span> <span class="mi">10</span> <span class="n">Edge</span> <span class="n">expect</span> <span class="mi">1</span>
+
+<span class="cm">/* find a graph with 2 nodes and some edges that has a max-clique =&gt; SAT */</span>
+<span class="k">run</span> <span class="n">maxClique_sat1</span> <span class="o">{</span>
+  <span class="k">some</span> <span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
+    <span class="o">#</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">some</span> <span class="n">g</span><span class="o">.</span><span class="n">edges</span>
+    <span class="n">maxClique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">clq</span><span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">5</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">1</span> <span class="n">Graph</span><span class="p">,</span> <span class="mi">5</span> <span class="n">Node</span><span class="p">,</span> <span class="mi">10</span> <span class="n">Edge</span> <span class="n">expect</span> <span class="mi">1</span>
+
+<span class="cm">/* find a graph with fewer nodes than its max-clique =&gt; UNSAT */</span>
+<span class="k">run</span> <span class="n">maxClique_unsat</span> <span class="o">{</span>
+  <span class="k">some</span> <span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
+    <span class="o">#</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span> <span class="o">&lt;</span> <span class="o">#</span><span class="n">clq</span>
+    <span class="n">maxClique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">clq</span><span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">5</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">1</span> <span class="n">Graph</span><span class="p">,</span> <span class="mi">5</span> <span class="n">Node</span><span class="p">,</span> <span class="mi">10</span> <span class="n">Edge</span> <span class="n">expect</span> <span class="mi">0</span>
+
+<span class="cm">/* find a graph with 2 nodes and some edges that has a max-clique with less than 2 nodes =&gt; UNSAT */</span>
+<span class="k">run</span> <span class="n">maxClique_unsat1</span> <span class="o">{</span>
+  <span class="k">some</span> <span class="n">g</span><span class="p">:</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">clq</span><span class="p">:</span> <span class="k">set</span> <span class="n">Node</span> <span class="o">{</span>
+    <span class="o">#</span><span class="n">g</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">some</span> <span class="n">g</span><span class="o">.</span><span class="n">edges</span>
+    <span class="o">#</span><span class="n">clq</span> <span class="o">&lt;</span> <span class="mi">2</span>
+    <span class="n">maxClique</span><span class="o">[</span><span class="n">g</span><span class="p">,</span> <span class="n">clq</span><span class="o">]</span>
+  <span class="o">}</span>
+<span class="o">}</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">5</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">1</span> <span class="n">Graph</span><span class="p">,</span> <span class="mi">5</span> <span class="n">Node</span><span class="p">,</span> <span class="mi">10</span> <span class="n">Edge</span> <span class="n">expect</span> <span class="mi">0</span>
+
+<span class="k">check</span> <span class="n">maxClique_props</span> <span class="k">for</span> <span class="mi">5</span> <span class="k">but</span> <span class="mi">5</span> <span class="kt">Int</span><span class="p">,</span> <span class="k">exactly</span> <span class="mi">1</span> <span class="n">Graph</span><span class="p">,</span> <span class="mi">5</span> <span class="n">Node</span><span class="p">,</span> <span class="mi">10</span> <span class="n">Edge</span> <span class="n">expect</span> <span class="mi">0</span>
+</pre></div>
+</body></html>
