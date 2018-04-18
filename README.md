@@ -7,7 +7,7 @@ higher-order quantification.  Alloy* imposes no restrictions on where
 higher-order quantifiers may be found or how deeply they may be
 nested.
 
-More documentation can be found at: http://alloy.mit.edu/alloy/hola
+More documentation can be found at: https://aleksandarmilicevic.github.io/hola/
 
 ## Download
 
