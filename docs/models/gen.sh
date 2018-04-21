@@ -7,7 +7,7 @@ if [[ -z $f ]]; then
 fi
 
 pygmentize -l alloy -f html -o $f.html $f.als; 
-echo '<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="http://alloy.mit.edu/alloy/hola/css/alloy.css"/></head><body>' > tmp.html
+echo '<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="../../../css/alloy.css"/></head><body>' > tmp.html
 cat $f.html >> tmp.html
 echo "</body></html>" >> tmp.html
 
