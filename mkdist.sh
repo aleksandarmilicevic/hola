@@ -1,19 +1,17 @@
 #!/bin/bash
 
-BUILD_DATE=$(date +"%F %H:%M %Z")
-VERSION="0.3_$(date +"%F")"
+readonly BUILD_DATE=$(date +"%F %H:%M %Z")
+readonly VERSION="0.3_$(date +"%F")"
 
-CP_SEP=":"
+declare CP_SEP=":"
 
-if [[ ! -z $(uname -o | grep -i "Cygwin") ]]
-then
+if [[ ! -z $(uname -o | grep -i "Cygwin") ]]; then
     CP_SEP=";"
 fi
 
 PATH=$JDK6/bin:$PATH
 
-if [[ -z $KODKOD_HOME ]]
-then
+if [[ -z $KODKOD_HOME ]]; then
     KODKOD_HOME=../kodkod
 fi
 
@@ -29,7 +27,7 @@ function trace { echo -e "$(tput setaf 7)$@$(tput sgr0)"; }
 function fatal { error $@; fade_end; exit 1; }
 
 function compile {
-    version_file=src/edu/mit/csail/sdg/alloy4/Version.java
+    local version_file=src/edu/mit/csail/sdg/alloy4/Version.java
     cp -r $version_file $version_file.bak
     sed -i \
       -e 's/public static String buildDate.*/public static String buildDate() { return "'"$BUILD_DATE"'"; }/' \
@@ -41,9 +39,8 @@ function compile {
     rm -rf bin/*
 
     step "compiling"
-    CP=$(ls -1 lib/*.jar | xargs | sed 's/\ /'$CP_SEP'/g')
-    if [[ -d $KODKOD_HOME ]]
-    then
+    local CP=$(ls -1 lib/*.jar | xargs | sed 's/\ /'$CP_SEP'/g')
+    if [[ -d $KODKOD_HOME ]]; then
         echo "adding kodkod to CP"
         CP=$KODKOD_HOME/bin:$CP
     else
@@ -52,17 +49,19 @@ function compile {
 
     trace "  using CLASSPATH: $CP"
     find src -name "*.java" | xargs javac -cp $CP -d bin # -source 1.5 -target 1.5
-    ok="$?"
+    local ok=$?
 
     mv $version_file.bak $version_file
 
-    if [[ $ok != "0" ]]; then fatal "Could not compile from sources"; fi
+    if [[ $ok != "0" ]]; then 
+        fatal "Could not compile from sources"
+    fi
 
     fade_end
 }
 
 function dist {
-    DST=dist
+    local DST=dist
 
     rm -rf $DST/*
     mkdir -p $DST/alloy
@@ -110,8 +109,7 @@ function dist {
     emph " *** jar file created:    $DST/$jarName"
 }
 
-if [[ "X"$1 == "X" ]]
-then
+if [[ "X"$1 == "X" ]]; then
   compile
   dist
 else

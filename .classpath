@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/kodkod-star"/>
+	<classpathentry kind="lib" path="extra-dev/java-cup-11a.jar"/>
+	<classpathentry kind="lib" path="extra-dev/JFlex.jar"/>
+	<classpathentry kind="lib" path="lib/apple-osx-ui.jar"/>
+	<classpathentry kind="lib" path="lib/hamcrest-core-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/kodkod.jar"/>
+	<classpathentry kind="lib" path="lib/sat4j.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

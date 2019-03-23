@@ -91,6 +91,7 @@ import edu.mit.csail.sdg.alloy4.Util;
 import edu.mit.csail.sdg.alloy4compiler.ast.Command;
 import edu.mit.csail.sdg.alloy4compiler.ast.Expr;
 import edu.mit.csail.sdg.alloy4compiler.ast.ExprBinary;
+import edu.mit.csail.sdg.alloy4compiler.ast.ExprBinary.Op;
 import edu.mit.csail.sdg.alloy4compiler.ast.ExprConstant;
 import edu.mit.csail.sdg.alloy4compiler.ast.ExprUnary;
 import edu.mit.csail.sdg.alloy4compiler.ast.ExprVar;
@@ -577,16 +578,23 @@ public class A4Solution {
         if (expr instanceof ExprConstant && ((ExprConstant)expr).op==ExprConstant.Op.STRING) return s2k.get(((ExprConstant)expr).string);
         if (expr instanceof Sig || expr instanceof Field || expr instanceof ExprVar) return a2k.get(expr);
         if (expr instanceof ExprBinary) {
-            Expr a=((ExprBinary)expr).left, b=((ExprBinary)expr).right;
-            switch(((ExprBinary)expr).op) {
-              case ARROW: return a2k(a).product(a2k(b));
-              case PLUS: return a2k(a).union(a2k(b));
-              case MINUS: return a2k(a).difference(a2k(b));
-              //TODO: IPLUS, IMINUS???
-              default: break;
-            }
+            ExprBinary e =(ExprBinary)expr;
+            return compose(e.op, e.left, e.right);
         }
         return null; // Current only UNION, PRODUCT, and DIFFERENCE of Sigs and Fields and ExprConstant.EMPTYNESS are allowed in a defined field's definition.
+    }
+
+    private Expression compose(Op op, Expr a, Expr b) throws ErrorFatal {
+        ExprOperator kkOp = 
+          op == ExprBinary.Op.ARROW ? ExprOperator.PRODUCT :
+          op == ExprBinary.Op.PLUS  ? ExprOperator.UNION :
+          op == ExprBinary.Op.MINUS ? ExprOperator.DIFFERENCE :
+          op == ExprBinary.Op.JOIN  ? ExprOperator.JOIN :
+          null;
+        if (kkOp == null) return null;
+        Expression kka = a2k(a); if (kka == null) return null;
+        Expression kkb = a2k(b); if (kkb == null) return null;
+        return kka.compose(kkOp, kkb);
     }
 
     /** Return a modifiable TupleSet representing a sound overapproximation of the given expression. */
