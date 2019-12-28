@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -e
+
+MY_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
 readonly BUILD_DATE=$(date +"%F %H:%M %Z")
 readonly VERSION="0.3_$(date +"%F")"
 
@@ -12,8 +16,10 @@ fi
 PATH=$JDK6/bin:$PATH
 
 if [[ -z $KODKOD_HOME ]]; then
-    KODKOD_HOME=../kodkod
+    KODKOD_HOME=$(cd ${MY_DIR}/../kodkod && pwd)
 fi
+
+pushd "$MY_DIR"
 
 function fade_start { echo -ne "$(tput setaf 8)"; }
 function fade_end   { echo -ne "$(tput sgr0)"; }
@@ -27,7 +33,7 @@ function trace { echo -e "$(tput setaf 7)$@$(tput sgr0)"; }
 function fatal { error $@; fade_end; exit 1; }
 
 function compile {
-    local version_file=src/edu/mit/csail/sdg/alloy4/Version.java
+    local version_file="${MY_DIR}/src/edu/mit/csail/sdg/alloy4/Version.java"
     cp -r $version_file $version_file.bak
     sed -i \
       -e 's/public static String buildDate.*/public static String buildDate() { return "'"$BUILD_DATE"'"; }/' \
@@ -106,7 +112,7 @@ function dist {
     rm -rf allo
     popd &> /dev/null
 
-    emph " *** jar file created:    $DST/$jarName"
+    emph " *** jar file created:    $(pwd)/$DST/$jarName"
 }
 
 if [[ "X"$1 == "X" ]]; then
@@ -115,3 +121,5 @@ if [[ "X"$1 == "X" ]]; then
 else
   $1
 fi
+
+popd
